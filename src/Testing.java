@@ -1,5 +1,3 @@
-import Code.CommandLineClass;
-
 public class Testing {
     void TestFunc(){
         CommandLineClass Test = new CommandLineClass();

@@ -1,5 +1,3 @@
-package Code;
-
 import java.io.FileReader;
 
 public class Main {
