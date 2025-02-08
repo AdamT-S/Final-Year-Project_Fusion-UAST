@@ -1,3 +1,5 @@
+package src.main;
+package main;
 
 
 public class Main {

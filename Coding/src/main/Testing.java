@@ -1,3 +1,5 @@
+package src.main;
+package main;
 public class Testing {
     void TestFunc(){
         CommandLineClass Test = new CommandLineClass();
