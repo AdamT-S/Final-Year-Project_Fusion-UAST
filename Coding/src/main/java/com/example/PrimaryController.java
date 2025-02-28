@@ -1,12 +1,20 @@
 package com.example;
 
 import java.io.IOException;
+
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.input.DragEvent;
 import javafx.scene.input.Dragboard;
 import javafx.scene.input.TransferMode;
 import javafx.scene.layout.StackPane;
+import javafx.stage.Stage;
+
 import java.io.File;
 import java.util.List;
 
@@ -44,4 +52,16 @@ public class PrimaryController {
         });
     
     }
+    @FXML
+    private Button Submit;
+
+    @FXML
+    private void changePahe() throws Exception{
+        Stage stage = (Stage) Submit.getScene().getWindow();
+        Parent root = FXMLLoader.load(getClass().getResource("secondary.fxml"));
+        Scene scene = new Scene(root);
+        stage.setScene(scene);
+        
+    }
+    
 }
