@@ -53,15 +53,15 @@ public class PrimaryController {
     
     }
     @FXML
-    private Button Submit;
+    private Button submitButton;
 
     @FXML
-    private void changePahe() throws Exception{
-        Stage stage = (Stage) Submit.getScene().getWindow();
+    private void changePage() throws Exception {
+        Stage stage = (Stage) submitButton.getScene().getWindow();
         Parent root = FXMLLoader.load(getClass().getResource("secondary.fxml"));
         Scene scene = new Scene(root);
         stage.setScene(scene);
-        
+    
     }
     
 }

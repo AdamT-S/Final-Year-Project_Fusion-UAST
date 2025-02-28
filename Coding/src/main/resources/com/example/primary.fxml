@@ -45,7 +45,7 @@
                     <Label fx:id = "DragnDropLabel" text="Drag and Drop" style="-fx-font-size: 14px;"/>
                 </VBox>
             </StackPane>
-            <Button text="Submit" style="-fx-font-size: 14px;"/>
+            <Button fx:id = "submitButton" text="Submit" style="-fx-font-size: 14px;" onAction="#changePage"/>
         </VBox>
     </center>
 </BorderPane>
