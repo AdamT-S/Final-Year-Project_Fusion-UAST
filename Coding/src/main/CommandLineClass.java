@@ -1,9 +1,12 @@
 package src.main;
 
 import java.io.BufferedReader;
-import java.io.File;
+import java.nio.File.*;
 import java.io.IOException;
-import java.io.InputStreamReader;;
+import java.io.InputStreamReader;
+import java.nio.file.FileVisitResult;
+import java.nio.file.Files;
+import java.nio.file.attribute.BasicFileAttributes;
 
 public class CommandLineClass{
     void CommandLineRun(String CommandString, String FilePath){
@@ -45,6 +48,24 @@ public class CommandLineClass{
         catch(Exception e){
             e.printStackTrace();
         }
+    }
+    void PrintAllFiles(String FilePath){
+        Path findFiles = Paths.get(FilePath);
+        try {
+            Files.walkFileTree(findFiles, new SimpleFileVisitor<Path>(){
+                @Override
+                public FileVisitResult visitFile(Path file, BasicFileAttributes attrs) throws IOException{
+                    System.out.println("Visited " + file);
+                    return FileVisitResult.CONTINUE;
+                }
+            });
+        } catch (IOException e){
+            e.printStackTrace();
+        }
+    }
+
+    void FlagDangerousFiles(){
+
     }
     
 }
