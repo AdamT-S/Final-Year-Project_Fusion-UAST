@@ -61,6 +61,11 @@ public class CommandLineClass{
                     System.out.println("Visited " + file);
                     return FileVisitResult.CONTINUE;
                 }
+                @Override
+                public FileVisitResult preVisitDirectory(Path dir, BasicFileAttributes attrs) throws IOException{
+                    System.out.println("Visited " + dir);
+                    return FileVisitResult.CONTINUE;
+                }
             });
         } catch (IOException e){
             e.printStackTrace();
