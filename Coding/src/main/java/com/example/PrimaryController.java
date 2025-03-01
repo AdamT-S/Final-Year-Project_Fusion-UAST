@@ -1,5 +1,6 @@
 package com.example;
 
+
 import java.io.IOException;
 
 import javafx.event.ActionEvent;
@@ -14,6 +15,9 @@ import javafx.scene.input.Dragboard;
 import javafx.scene.input.TransferMode;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
+import javafx.application.Application;
+
+
 
 import java.io.File;
 import java.util.List;
@@ -62,6 +66,14 @@ public class PrimaryController {
         Scene scene = new Scene(root);
         stage.setScene(scene);
     
+    }
+
+    @FXML
+    Button testButton;
+
+    @FXML
+    void runTests() throws Exception{
+        Main.main(null);
     }
     
 }

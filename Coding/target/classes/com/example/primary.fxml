@@ -46,6 +46,7 @@
                 </VBox>
             </StackPane>
             <Button fx:id = "submitButton" text="Submit" style="-fx-font-size: 14px;" onAction="#changePage"/>
+            <Button fx:id = "testButton" text="Test Functions" style="-fx-font-size: 14px;" onAction="#runTests"/>
         </VBox>
     </center>
 </BorderPane>
