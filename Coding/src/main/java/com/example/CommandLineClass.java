@@ -68,7 +68,9 @@ public class CommandLineClass{
         }
     }
 
-    void FlagDangerousFiles(){
+    void FlagDangerousFiles(String Directory){
+       String SAST_Sgrep = "semgrep scan --config auto " + Directory;
+       CommandLineRun(Directory, SAST_Sgrep);
 
     }
     
