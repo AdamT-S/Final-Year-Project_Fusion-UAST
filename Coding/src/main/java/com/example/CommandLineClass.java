@@ -73,10 +73,14 @@ public class CommandLineClass{
     }
 
     void FlagDangerousFiles(String Directory){
-        String SAST_Sgrep = "semgrep scan --config auto " + "\"" + Directory + "\"";
+        String SAST_Sgrep = "semgrep scan --config auto " + "\"" + Directory + "\""+ " --output /home/kali/toolname/SemgrepScan.txt --text";
+        System.out.println(SAST_Sgrep);
         CommandLineRun(SAST_Sgrep, Directory);
     }
     
+    void ReadOutputs(){
+
+    }
     
     
 }
