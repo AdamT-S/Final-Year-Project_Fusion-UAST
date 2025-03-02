@@ -11,7 +11,8 @@ public class Main {
         Test.ListDir();
         file.ReadFile(directory);
         Test.PrintAllFiles("/home/kali/Final Year Project/Final-Year-Project-Automated-PenTest/Android-InsecureBankv2-master/InsecureBankv2");
-        Test.FlagDangerousFiles("/home/kali/Final Year Project/Final-Year-Project-Automated-PenTest/Android-InsecureBankv2-master/InsecureBankv2");
+        Test.FlagDangerousFiles("/home/kali/Final Year Project/Final-Year-Project-Automated-PenTest/Android-InsecureBankv2-master");
+
     }
 }
     

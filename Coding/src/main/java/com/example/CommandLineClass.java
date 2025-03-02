@@ -14,9 +14,12 @@ import java.nio.file.attribute.BasicFileAttributes;;
 public class CommandLineClass{
     void CommandLineRun(String CommandString, String FilePath){
         try{
-        
-    
-            ProcessBuilder command = new ProcessBuilder(CommandString.split(" "));
+            // Print the directory for debugging purposes
+            System.out.println("Directory: " + FilePath);
+            // Split the command using a more robust method
+            String[] commandArray = {"/bin/bash", "-c", CommandString}; // Using bash to handle the command
+            
+            ProcessBuilder command = new ProcessBuilder(commandArray);
             command.redirectErrorStream(true);
             if (FilePath != null){
                 ChangeDirectory(FilePath, command);
@@ -33,6 +36,7 @@ public class CommandLineClass{
             e.printStackTrace();
         } 
     }
+    
     void Decompiler(String APK){    
         String Decompile = "apktool d" + APK;
         CommandLineRun(Decompile, null);
@@ -69,10 +73,11 @@ public class CommandLineClass{
     }
 
     void FlagDangerousFiles(String Directory){
-       String SAST_Sgrep = "semgrep scan --config auto " + Directory;
-       CommandLineRun(SAST_Sgrep, Directory);
-
+        String SAST_Sgrep = "semgrep scan --config auto " + "\"" + Directory + "\"";
+        CommandLineRun(SAST_Sgrep, Directory);
     }
+    
+    
     
 }
 
