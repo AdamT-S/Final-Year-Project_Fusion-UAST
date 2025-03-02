@@ -12,6 +12,8 @@ import java.nio.file.SimpleFileVisitor;
 import java.nio.file.attribute.BasicFileAttributes;;
 
 public class CommandLineClass{
+    private FileRead ReadFlagFiles = new FileRead();
+
     void CommandLineRun(String CommandString, String FilePath){
         try{
             // Print the directory for debugging purposes
@@ -76,11 +78,9 @@ public class CommandLineClass{
         String SAST_Sgrep = "semgrep scan --config auto " + "\"" + Directory + "\""+ " --output /home/kali/toolname/SemgrepScan.txt --text";
         System.out.println(SAST_Sgrep);
         CommandLineRun(SAST_Sgrep, Directory);
+        ReadFlagFiles.ReadFlaggedFiles("/home/kali/toolname/SemgrepScan.txt", Directory);
     }
     
-    void ReadOutputs(){
-
-    }
     
     
 }

@@ -10,7 +10,8 @@ import java.util.regex.Pattern;
 
 public class FileRead{
     List<String> permList = new ArrayList<>();
-    public void ReadFile(String FileName){
+    List<String> dangerousFileList = new ArrayList<>();
+    public void ReadManifest(String FileName){
         try{
             BufferedReader reader = new BufferedReader(new FileReader(FileName));
             String line = reader.readLine();
@@ -27,6 +28,31 @@ public class FileRead{
             reader.close();
             System.out.println("Permissions: ");
             for (String s : permList){
+                System.out.println(s);
+            }
+        }
+        catch (IOException e){
+            e.printStackTrace();
+        } 
+    }
+
+    public void ReadFlaggedFiles(String FileName, String FilePath){
+        try{
+            BufferedReader reader = new BufferedReader(new FileReader(FileName));
+            String line = reader.readLine();
+            Pattern pattern = Pattern.compile(FilePath+"/");
+            while (line!= null){
+                Matcher matcher = pattern.matcher(line);
+                if (matcher.find()){
+                    String permission = matcher.group(1);
+                    dangerousFileList.add(permission);
+                }
+                
+                line = reader.readLine();
+            }
+            reader.close();
+            System.out.println("Flagged Files: ");
+            for (String s : dangerousFileList){
                 System.out.println(s);
             }
         }
