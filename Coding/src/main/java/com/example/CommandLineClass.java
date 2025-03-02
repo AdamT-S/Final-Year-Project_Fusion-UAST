@@ -2,6 +2,7 @@ package com.example;
 
 import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.nio.file.FileVisitResult;
@@ -52,7 +53,7 @@ public class CommandLineClass{
     void ChangeDirectory(String DirectoryName, ProcessBuilder DirChange){
         try{
             DirChange.directory(new File(DirectoryName));
-            System.out.println(".....\n Directory Change Successful \n ...");
+            System.out.println(".....\n Directory Change Successful \n....");
         }
         catch(Exception e){
             e.printStackTrace();
@@ -74,7 +75,7 @@ public class CommandLineClass{
         }
     }
 
-    void FlagDangerousFiles(String Directory){
+    void FlagDangerousFiles(String Directory) throws FileNotFoundException{
         String SAST_Sgrep = "semgrep scan --config auto " + "\"" + Directory + "\""+ " --output /home/kali/toolname/SemgrepScan.txt --text";
         System.out.println(SAST_Sgrep);
         CommandLineRun(SAST_Sgrep, Directory);
