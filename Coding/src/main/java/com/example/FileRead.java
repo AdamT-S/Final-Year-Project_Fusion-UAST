@@ -9,16 +9,27 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class FileRead{
+    //Lists to ensure that any files identified can be reused
     List<String> permList = new ArrayList<>();
     List<String> dangerousFileList = new ArrayList<>();
+
+    //Read the manifest files and its permissions
     public void ReadManifest(String FileName){
+        //This ensures that if the file returns with an error that the system doesnt crash
         try{
             BufferedReader reader = new BufferedReader(new FileReader(FileName));
             String line = reader.readLine();
+            //Gets the data after the android.permission section in the manifest file
             Pattern pattern = Pattern.compile("android\\.permission\\.([^\"]+)\"");
+            //reads the whole document to make sure that all of the permissions are added
             while (line!= null){
                 Matcher matcher = pattern.matcher(line);
                 if (matcher.find()){
+                    /*
+                    Groups the part of the line that is desired within the manifest file and adds it to a list
+                    ([^\"]+)\" is the group. () acts as the grouping [^\"] acts as the characters that can be used where ^" means any character except "
+                    and the + means all characters after that too.
+                    */
                     String permission = matcher.group(1);
                     permList.add(permission);
                 }
@@ -26,6 +37,7 @@ public class FileRead{
                 line = reader.readLine();
             }
             reader.close();
+            //prints off Manifest permissions
             System.out.println("Permissions: ");
             for (String s : permList){
                 System.out.println(s);
@@ -38,6 +50,7 @@ public class FileRead{
 
     public void ReadFlaggedFiles(String FileName, String FilePath) throws IOException{
         // source: https://stackoverflow.com/questions/11169266/in-java-how-to-print-entire-line-in-the-file-when-string-match-found
+        //looks for that part within a line when comparing
         String path = "Android-InsecureBankv2-master";
         BufferedReader r = new BufferedReader(new FileReader(FileName));
         Pattern patt = Pattern.compile(FilePath);
@@ -55,6 +68,7 @@ public class FileRead{
                 line = r.readLine();
             }
             r.close();
+            //Prints out the dangerous files found
             System.out.println("Dangerous Files: ");
             for (String s : dangerousFileList){
                 System.out.println(s);

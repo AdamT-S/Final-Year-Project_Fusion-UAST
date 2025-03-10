@@ -3,6 +3,7 @@ import java.io.IOException;
 
 
 public class Main {
+    //The main class right now just acts more as a test button, App.java should really be the Main class.
     public static void main(String[] args) throws IOException{
         CommandLineClass Test = new CommandLineClass();
         FileRead file = new FileRead();
