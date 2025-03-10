@@ -1,15 +1,10 @@
 package com.example;
 
 import java.io.BufferedReader;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
-import java.io.InputStream;
-import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -41,21 +36,32 @@ public class FileRead{
         } 
     }
 
-    public void ReadFlaggedFiles(String FileName, String FilePath) throws FileNotFoundException{
+    public void ReadFlaggedFiles(String FileName, String FilePath) throws IOException{
+        // source: https://stackoverflow.com/questions/11169266/in-java-how-to-print-entire-line-in-the-file-when-string-match-found
         String path = "/home/kali/Final Year Project/Final-Year-Project-Automated-PenTest/Android-InsecureBankv2-master";
- 
-        InputStream is = new FileInputStream(FileName);
- 
-        try (Scanner sc = new Scanner(
-                 is, StandardCharsets.UTF_8.name())) {
- 
-            while (sc.hasNextLine()) {
-                System.out.println(sc.nextLine());
+        BufferedReader r = new BufferedReader(new FileReader(FileName));
+        Pattern patt = Pattern.compile(FilePath);
+        String line;
+        
+        while ((line = r.readLine()) != null) {  
+          System.out.println(line);
+          System.out.println("This has been read from the file!!!");
+          Matcher m = patt.matcher(line);
+          while (m.find()) {
+            int start = m.start(0);
+            int end = m.end(0);
+            System.out.println(line.substring(start, end));
+            if(line.contains("/") || line.contains("\\")){
+                dangerousFileList.add(line);
             }
+          }
+        
         }
-            System.out.println("Flagged Files: ");
-            for (String s : dangerousFileList){
-                System.out.println(s);
-            }
+        r.close();
+        System.out.println("Flagged Files: ");
+        for (String s : dangerousFileList){
+            System.out.println(s);
+        }
+        
     }
 }
