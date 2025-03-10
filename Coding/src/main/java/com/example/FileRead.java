@@ -38,30 +38,30 @@ public class FileRead{
 
     public void ReadFlaggedFiles(String FileName, String FilePath) throws IOException{
         // source: https://stackoverflow.com/questions/11169266/in-java-how-to-print-entire-line-in-the-file-when-string-match-found
-        String path = "/home/kali/Final Year Project/Final-Year-Project-Automated-PenTest/Android-InsecureBankv2-master";
+        String path = "Android-InsecureBankv2-master";
         BufferedReader r = new BufferedReader(new FileReader(FileName));
         Pattern patt = Pattern.compile(FilePath);
         String line;
         
-        while ((line = r.readLine()) != null) {  
-          System.out.println(line);
-          System.out.println("This has been read from the file!!!");
-          Matcher m = patt.matcher(line);
-          while (m.find()) {
-            int start = m.start(0);
-            int end = m.end(0);
-            System.out.println(line.substring(start, end));
-            if(line.contains("/") || line.contains("\\")){
-                dangerousFileList.add(line);
+        try{
+            line = r.readLine();
+            patt = Pattern.compile(path);
+            while (line!= null){
+                Matcher matcher = patt.matcher(line);
+                if (matcher.find()){
+                    dangerousFileList.add(line);
+                }
+                
+                line = r.readLine();
             }
-          }
-        
+            r.close();
+            System.out.println("Dangerous Files: ");
+            for (String s : dangerousFileList){
+                System.out.println(s);
+            }
         }
-        r.close();
-        System.out.println("Flagged Files: ");
-        for (String s : dangerousFileList){
-            System.out.println(s);
-        }
-        
+        catch (IOException e){
+            e.printStackTrace();
+        } 
     }
 }
