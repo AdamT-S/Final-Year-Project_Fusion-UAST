@@ -1,24 +1,16 @@
 package com.example;
 
 
-import java.io.IOException;
-
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.input.DragEvent;
 import javafx.scene.input.Dragboard;
 import javafx.scene.input.TransferMode;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
-import javafx.application.Application;
-
-
-
 import java.io.File;
 import java.util.List;
 
@@ -27,11 +19,13 @@ public class PrimaryController {
     @FXML
     private StackPane DragnDrop;
 
+    //This is the label for the drag and drop box
     @FXML
     private Label DragnDropLabel;
 
     @FXML
     public void initialize() {
+        //When a file is dragged onto the drag and drop box it will run this command (getting the file path)
         DragnDrop.setOnDragOver(event -> {
             if (event.getGestureSource() != DragnDrop && event.getDragboard().hasFiles()) {
                 event.acceptTransferModes(TransferMode.COPY_OR_MOVE);
@@ -56,6 +50,7 @@ public class PrimaryController {
         });
     
     }
+    //Submit button swaps to the next page... needs to have checks before it can work
     @FXML
     private Button submitButton;
 
@@ -67,7 +62,7 @@ public class PrimaryController {
         stage.setScene(scene);
     
     }
-
+    // This runs all the backend in one go to ensure that it is all functional
     @FXML
     Button testButton;
 
