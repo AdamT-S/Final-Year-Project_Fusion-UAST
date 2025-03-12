@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+
 public class FileRead{
     //Lists to ensure that any files identified can be reused
     List<String> permList = new ArrayList<>();
@@ -51,7 +52,9 @@ public class FileRead{
     public void ReadFlaggedFiles(String FileName, String FilePath) throws IOException{
         // source: https://stackoverflow.com/questions/11169266/in-java-how-to-print-entire-line-in-the-file-when-string-match-found
         //looks for that part within a line when comparing
-        String path = "Android-InsecureBankv2-master";
+        String[] firstPartOfFile = FilePath.split("/");
+        String path = firstPartOfFile[1];
+        System.out.println(path);
         BufferedReader r = new BufferedReader(new FileReader(FileName));
         Pattern patt = Pattern.compile(FilePath);
         String line;
@@ -59,10 +62,14 @@ public class FileRead{
         try{
             line = r.readLine();
             patt = Pattern.compile(path);
+            // I can use matcher to match the beginning of the file path. I can then use a boolean to find the end of the filepath with getExtension() to end it and store that!!!
             while (line!= null){
                 Matcher matcher = patt.matcher(line);
                 if (matcher.find()){
                     dangerousFileList.add(line);
+                    while(line.getExtension() != true){
+
+                    }
                 }
                 
                 line = r.readLine();
