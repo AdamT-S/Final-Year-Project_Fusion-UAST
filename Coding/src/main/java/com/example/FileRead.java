@@ -51,36 +51,49 @@ public class FileRead{
 
     public void ReadFlaggedFiles(String FileName, String FilePath) throws IOException{
         // source: https://stackoverflow.com/questions/11169266/in-java-how-to-print-entire-line-in-the-file-when-string-match-found
-        //looks for that part within a line when comparing
         String[] firstPartOfFile = FilePath.split("/");
-        String path = firstPartOfFile[1];
+        String path = firstPartOfFile[1]; 
         System.out.println(path);
-        BufferedReader r = new BufferedReader(new FileReader(FileName));
-        Pattern patt = Pattern.compile(FilePath);
-        String line;
         
-        try{
+        
+        BufferedReader r = new BufferedReader(new FileReader(FileName));
+        Pattern patt = Pattern.compile(path); 
+        String line;
+        List<String> dangerousFileList = new ArrayList<>();
+        
+        try {
             line = r.readLine();
-            patt = Pattern.compile(path);
-            // I can use matcher to match the beginning of the file path. I can then use a boolean to find the end of the filepath with getExtension() to end it and store that!!!
-            while (line!= null){
+            int issuebreak = 0;
+            
+            while (line != null && issuebreak < 11) {
                 Matcher matcher = patt.matcher(line);
-                if (matcher.find()){
+                if (matcher.find()) {
                     dangerousFileList.add(line);
-                    while(line.getExtension() != true){
+                    int checkPath = line.lastIndexOf(".");
 
+                    while (checkPath == -1 && line != null) { 
+                        line = r.readLine();
+                        checkPath = line.lastIndexOf(".");
+                        dangerousFileList.add(line);
                     }
+                    System.out.println("\nThe loop has ended and will restart here\n");
                 }
-                
+
+                if (issuebreak == 10) {
+                    System.out.println("I'm having loop issues");
+                }
                 line = r.readLine();
             }
+
             r.close();
-            //Prints out the dangerous files found
+            System.out.println("No issues here");
+            
             System.out.println("Dangerous Files: ");
-            for (String s : dangerousFileList){
+            for (String s : dangerousFileList) {
                 System.out.println(s);
             }
         }
+
         catch (IOException e){
             e.printStackTrace();
         } 
