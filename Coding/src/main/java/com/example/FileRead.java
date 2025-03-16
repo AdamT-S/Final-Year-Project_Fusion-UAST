@@ -93,6 +93,26 @@ public class FileRead{
             for (String s : dangerousFileList) {
                 System.out.println(s);
             }
+
+            List<String> appendedDangerList = new ArrayList<>();
+            StringBuilder addStringBuilder = new StringBuilder();
+
+            for(String val : dangerousFileList){
+                val = val.trim();
+                if(val.contains("."))
+                {
+                    addStringBuilder.append(val);
+                    appendedDangerList.add(addStringBuilder.toString());
+                    addStringBuilder.setLength(0);
+                }
+                else{
+                    addStringBuilder.append((val));
+                }
+                
+            }
+            for(String val : appendedDangerList){
+                System.out.println(val);
+            }
         }
         catch (IOException e){
             e.printStackTrace();
