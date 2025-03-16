@@ -93,49 +93,9 @@ public class FileRead{
             for (String s : dangerousFileList) {
                 System.out.println(s);
             }
-            System.out.println("This is the end of dangerous files list");
-            List<String> filteredDangerousList = new ArrayList<>();
-            int j = 0;
-                
-            for (int i = 0; i < dangerousFileList.size(); i++) {
-                StringBuilder filepathBuilder = new StringBuilder();
-                boolean addedToList = false;
-                for (String str : dangerousFileList) {
-                    j++;
-                    str = str.trim();
-                    if (str.contains(path) && addedToList != true) 
-                    {
-                        
-                        filepathBuilder.append(str);
-                        System.out.println(str);
-                        addedToList = true; 
-                    }
-                    if (addedToList && !filepathBuilder.toString().contains(".")) 
-                    {
-                        filepathBuilder.append(str);
-                        System.out.println(str);
-                    }
-                    if (addedToList && filepathBuilder.toString().contains(path) && str.contains(".")) {
-                        filepathBuilder.append(str);
-                        System.out.println(str);
-                        break;
-                    }
-            
-                    if (!str.contains(path) && addedToList == false) {
-                        System.out.println(str + " is not the correct format, and will be skipped");
-                    }
-                }
-            
-                filteredDangerousList.add(filepathBuilder.toString());
-            }
-                System.out.println("Filtered Dangerous files: \n");
-                for (String s : filteredDangerousList){
-                    System.out.println(s);
-                    System.out.println("New file");
-                }
         }
         catch (IOException e){
             e.printStackTrace();
-        } 
-    }
+        }
+    } 
 }
