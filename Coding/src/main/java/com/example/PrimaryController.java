@@ -57,7 +57,12 @@ public class PrimaryController {
     @FXML
     private void changePage() throws Exception {
         Stage stage = (Stage) submitButton.getScene().getWindow();
-        Parent root = FXMLLoader.load(getClass().getResource("secondary.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("secondary.fxml"));
+        Parent root = loader.load();
+        SecondaryController SecCon = loader.getController();
+        stage.setOnShowing(vent -> {
+            SecCon.increase(2);
+        });
         Scene scene = new Scene(root);
         stage.setScene(scene);
     
