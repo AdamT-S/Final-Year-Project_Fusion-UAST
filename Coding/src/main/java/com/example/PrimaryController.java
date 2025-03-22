@@ -60,12 +60,10 @@ public class PrimaryController {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("secondary.fxml"));
         Parent root = loader.load();
         SecondaryController SecCon = loader.getController();
-        stage.setOnShowing(vent -> {
-            SecCon.increase(2);
-        });
+       
         Scene scene = new Scene(root);
         stage.setScene(scene);
-    
+        SecCon.increase(2);
     }
     // This runs all the backend in one go to ensure that it is all functional
     @FXML

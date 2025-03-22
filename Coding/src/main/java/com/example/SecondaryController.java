@@ -10,21 +10,26 @@ public class SecondaryController {
     @FXML
     private ProgressBar CodeLoading;
     
-    double progress = 0;
+    float progress = 0;
 
     public void increase(int num_Functions){
-        float progress_addit = 1/num_Functions;
-        for(float i = 0; i < 1; i += progress_addit)
+        System.out.println("The increase function has been succesfully called");
+        float progress_addit = 1.0f/num_Functions;
+
+        for(int i = 0; i < num_Functions; i++)
         {
+            System.out.println("The for loop has been successfully called");
             progress += progress_addit;
-            CodeLoading.setProgress(progress); 
-            try{
-                Thread.sleep(1000);
-            }
-            catch(InterruptedException e){
-                System.err.println("The sleep loop didnt work");
-            }
+            CodeLoading.setProgress(progress);   
             
+        }
+        if(progress == 1)
+        {
+            System.out.println("This is the next page");
+        }
+        else
+        {
+            System.exit(1);
         }
     }
 }
