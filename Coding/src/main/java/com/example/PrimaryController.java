@@ -17,23 +17,23 @@ import java.util.List;
 public class PrimaryController {
 
     @FXML
-    private StackPane DragnDrop;
+    private StackPane DragandDrop;
 
     //This is the label for the drag and drop box
     @FXML
-    private Label DragnDropLabel;
+    private Label DragandDropLabel;
 
     @FXML
     public void initialize() {
         //When a file is dragged onto the drag and drop box it will run this command (getting the file path)
-        DragnDrop.setOnDragOver(event -> {
-            if (event.getGestureSource() != DragnDrop && event.getDragboard().hasFiles()) {
+        DragandDrop.setOnDragOver(event -> {
+            if (event.getGestureSource() != DragandDrop && event.getDragboard().hasFiles()) {
                 event.acceptTransferModes(TransferMode.COPY_OR_MOVE);
             }
             event.consume();
         });
 
-        DragnDrop.setOnDragDropped(event -> {
+        DragandDrop.setOnDragDropped(event -> {
             Dragboard dragBoard = event.getDragboard();
             boolean check = false;
             if (dragBoard.hasFiles()) {
@@ -43,7 +43,7 @@ public class PrimaryController {
                                         .map(File::getAbsolutePath)
                                         .reduce((a, b) -> a + "\n" + b)
                                         .orElse("No files dropped");
-                DragnDropLabel.setText(filePaths);
+                DragandDropLabel.setText(filePaths);
             }
             event.setDropCompleted(check);
             event.consume();

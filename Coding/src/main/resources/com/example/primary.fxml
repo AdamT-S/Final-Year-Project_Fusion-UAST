@@ -14,10 +14,10 @@
 
 
 
-<BorderPane xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.PrimaryController">
+<BorderPane xmlns:fx="http://javafx.com/fxml" fx:controller="com.example.PrimaryController">
     <top>
         <VBox alignment="CENTER" spacing="20.0">
-            <Label text="Automated Tester" style="-fx-font-size: 24px; -fx-font-weight: bold;"/>
+            <Label text="Automated Tester" style="-fx-font-size: 24px;"/>
             <Label text="Select the tests you wish to run and upload an apk file to analyse" style="-fx-font-size: 14px;"/>
             <padding> 
                <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" /> 
@@ -26,7 +26,7 @@
     </top>
     <left>
         <VBox spacing="10.0">
-            <Label text="" style="-fx-font-size: 16px; -fx-font-weight: bold;"/>
+            <Label text="" style="-fx-font-size: 16px;"/>
             <MenuButton text = "Select Testing Tools">
                <items>
                   <CheckMenuItem text="Check Permissions" />
@@ -37,12 +37,9 @@
     </left>
     <center>
         <VBox alignment="CENTER" spacing="20.0">
-            <StackPane fx:id = "DragnDrop" style="-fx-border-color: gray; -fx-border-width: 1; -fx-background-color: lightgray;" prefWidth="200" prefHeight="150">
+            <StackPane fx:id = "DragandDrop" style="-fx-border-color: gray; -fx-border-width: 1; -fx-background-color: lightgray;" prefWidth="200" prefHeight="150">
                 <VBox alignment="CENTER">
-                    <ImageView>
-                        <Image url="@file_upload_icon.png"/>
-                    </ImageView>
-                    <Label fx:id = "DragnDropLabel" text="Drag and Drop" style="-fx-font-size: 14px;"/>
+                    <Label fx:id = "DragandDropLabel" text="Drag and Drop" style="-fx-font-size: 14px;"/>
                 </VBox>
             </StackPane>
             <Button fx:id = "submitButton" text="Submit" style="-fx-font-size: 14px;" onAction="#changePage"/>
