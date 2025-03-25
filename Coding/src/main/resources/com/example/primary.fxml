@@ -29,8 +29,8 @@
             <Label text="" style="-fx-font-size: 16px;"/>
             <MenuButton text = "Select Testing Tools">
                <items>
-                  <CheckMenuItem text="Check Permissions" />
-                  <CheckMenuItem text="Next item" />
+                  <CheckMenuItem fx:id="CheckPerms" text="Check Permissions" />
+                  <CheckMenuItem fx:id="CheckSAST" text="Run Static Analysis" />
                </items>
             </MenuButton>
         </VBox>
@@ -44,6 +44,7 @@
             </StackPane>
             <Button fx:id = "submitButton" text="Submit" style="-fx-font-size: 14px;" onAction="#changePage"/>
             <Button fx:id = "testButton" text="Test Functions" style="-fx-font-size: 14px;" onAction="#runTests"/>
+            
         </VBox>
     </center>
 </BorderPane>

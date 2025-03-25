@@ -1,6 +1,8 @@
 package com.example;
 
 import java.io.IOException;
+import java.util.List;
+
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -13,14 +15,17 @@ import javafx.concurrent.Task;
 public class SecondaryController {
     @FXML
     private ProgressBar CodeLoading;
+
+    CommandLineClass Test = new CommandLineClass();
+    FileRead file = new FileRead();
     
     float progress = 0;
 
-    public void increase(int num_Functions){
+    public void increase(List<Runnable> commandlist){
         System.out.println("The increase function has been succesfully called");
-        float progress_addit = 1.0f/num_Functions;
+        float progress_addit = 1.0f/commandlist.size();
 
-        for(int i = 0; i < num_Functions; i++)
+        for(int i = 0; i < commandlist.size(); i++)
         {
             System.out.println("The for loop has been successfully called");
             progress += progress_addit;
@@ -51,4 +56,6 @@ public class SecondaryController {
         }
         
     }
+
+
 }
