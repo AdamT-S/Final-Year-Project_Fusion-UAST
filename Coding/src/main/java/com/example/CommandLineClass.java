@@ -83,11 +83,12 @@ public class CommandLineClass{
         }
     }
     //This flags all dangerous files found by analysis tools
-    void FlagDangerousFiles(String Directory) throws IOException{
+    Runnable FlagDangerousFiles(String Directory) throws IOException{
         String SAST_Sgrep = "semgrep scan --config auto " + "\"" + Directory + "\""+ " --output /home/kali/toolname/SemgrepScan.txt --text";
         System.out.println(SAST_Sgrep);
         CommandLineRun(SAST_Sgrep, Directory);
         ReadFlagFiles.ReadFlaggedFiles("/home/kali/toolname/SemgrepScan.txt", Directory);
+                return null;
     }
     
     
