@@ -26,6 +26,18 @@ public class PrimaryController {
     @FXML
     private Label DragandDropLabel;
 
+    CommandLineClass Test = new CommandLineClass();
+    FileRead file = new FileRead();
+
+    private void installer()
+    {
+        Test.CommandLineRun("sudo apt update", null);
+        Test.CommandLineRun("sudo apt upgrade", null);
+        Test.CommandLineRun("sudo apt install java", null);
+        Test.CommandLineRun("sudo apt install semgrep", null);
+        Test.CommandLineRun("Y", null);
+        
+    }
 
     @FXML
     public void initialize() {
@@ -61,8 +73,7 @@ public class PrimaryController {
     @FXML
     CheckMenuItem CheckSAST;
 
-    CommandLineClass Test = new CommandLineClass();
-    FileRead file = new FileRead();
+    
 
     //Submit button swaps to the next page... needs to have checks before it can work
     @FXML
