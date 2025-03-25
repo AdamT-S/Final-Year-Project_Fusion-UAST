@@ -59,7 +59,8 @@ public class PrimaryController {
     CheckMenuItem CheckPerms;
 
     @FXML
-    CheckMenuItem checkSAST;
+    CheckMenuItem CheckSAST;
+
     CommandLineClass Test = new CommandLineClass();
     FileRead file = new FileRead();
 
@@ -71,37 +72,36 @@ public class PrimaryController {
     private Label invalidInput;
 
     @FXML
-    private void changePage() throws Exception {
-        if (DragandDropLabel.toString().contains("/") && (CheckPerms.isSelected() || checkSAST.isSelected()))
-        {
-            List<Runnable> commands = new ArrayList<>();
-            Stage stage = (Stage) submitButton.getScene().getWindow();
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("secondary.fxml"));
-            Parent root = loader.load();
-            SecondaryController SecCon = loader.getController();
-            if (CheckPerms.isSelected()) {
-                commands.add(() -> file.ReadManifest(DragandDropLabel.getText()));
-            }
-            if (checkSAST.isSelected()) {
-                commands.add(() -> {
-                    try {
-                        Test.FlagDangerousFiles(DragandDropLabel.getText());
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-                });
-            }
-            
-            Scene scene = new Scene(root);
-            stage.setScene(scene);
-            SecCon.increase(commands);
+private void changePage() throws Exception {
+    if (DragandDropLabel.getText().contains("/") && (CheckPerms.isSelected() || CheckSAST.isSelected())) {
+        List<Runnable> commands = new ArrayList<>();
+        Stage stage = (Stage) submitButton.getScene().getWindow();
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("secondary.fxml"));
+        Parent root = loader.load();
+        SecondaryController SecCon = loader.getController();
+
+        // Wrap method calls in lambda expressions
+        if (CheckPerms.isSelected()) {
+            commands.add(() -> file.ReadManifest(DragandDropLabel.getText()));
         }
-        else
-        {
-            DragandDropLabel.setText("Invalid input! Please tick the tests you want to run");
+        if (CheckSAST.isSelected()) {
+            commands.add(() -> {
+                try {
+                    Test.FlagDangerousFiles(DragandDropLabel.getText());
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            });
         }
-        
+
+        Scene scene = new Scene(root);
+        stage.setScene(scene);
+        SecCon.increase(commands);
+    } else {
+        DragandDropLabel.setText("Invalid input! Please tick the tests you want to run");
     }
+}
+
     // This runs all the backend in one go to ensure that it is all functional
     @FXML
     Button testButton;

@@ -25,11 +25,11 @@ public class SecondaryController {
         System.out.println("The increase function has been succesfully called");
         float progress_addit = 1.0f/commandlist.size();
 
-        for(int i = 0; i < commandlist.size(); i++)
-        {
+        for (Runnable command : commandlist) {
+            command.run();
             System.out.println("The for loop has been successfully called");
-            progress += progress_addit;
-            CodeLoading.setProgress(progress);
+            progress_addit+=progress_addit;
+            CodeLoading.setProgress(progress_addit);
                
             
         }
