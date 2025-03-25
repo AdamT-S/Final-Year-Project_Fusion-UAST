@@ -30,11 +30,12 @@ public class SecondaryController {
             System.out.println("The for loop has been successfully called");
             progress_addit+=progress_addit;
             CodeLoading.setProgress(progress_addit);
+            System.out.println(progress_addit);
                
             
         }
         
-        if(progress == 1)
+        if(progress_addit >= 1)
         {
             Stage stage = (Stage) CodeLoading.getScene().getWindow();
             FXMLLoader loader = new FXMLLoader(getClass().getResource("results.fxml"));
@@ -52,7 +53,7 @@ public class SecondaryController {
         }
         else
         {
-            System.exit(1);
+            System.out.println("This is whats causing your code to quit :)");
         }
         
     }

@@ -74,8 +74,15 @@ public class CommandLineClass{
                 @Override
                 public FileVisitResult visitFile(Path file, BasicFileAttributes attrs) throws IOException{
                     System.out.println("Visited " + file);
+                    if(file.toString().contains("Manifest"))
+                    {
+                        ReadFlagFiles.ReadManifest(file.toString());
+                        return FileVisitResult.TERMINATE;
+                        
+                    }
                     return FileVisitResult.CONTINUE;
                 }
+
                 
             });
         } catch (IOException e){

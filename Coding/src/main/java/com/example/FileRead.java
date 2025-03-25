@@ -16,7 +16,7 @@ public class FileRead{
     List<String> dangerousFileList = new ArrayList<>();
 
     //Read the manifest files and its permissions
-    public void ReadManifest(String FileName){
+    public Runnable ReadManifest(String FileName){
         //This ensures that if the file returns with an error that the system doesnt crash
         try{
             BufferedReader reader = new BufferedReader(new FileReader(FileName));
@@ -47,7 +47,8 @@ public class FileRead{
         }
         catch (IOException e){
             e.printStackTrace();
-        } 
+        }
+                return null; 
     }
 
     public void ReadFlaggedFiles(String FileName, String FilePath) throws IOException{
