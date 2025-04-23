@@ -93,7 +93,7 @@ private void changePage() throws Exception {
 
         // Wrap method calls in lambda expressions
         if (CheckPerms.isSelected()) {
-            commands.add(() -> Test.PrintAllFiles(DragandDropLabel.getText()));
+            commands.add(() -> Test.SearchFiles(DragandDropLabel.getText()));
         }
         if (CheckSAST.isSelected()) {
             commands.add(() -> {
