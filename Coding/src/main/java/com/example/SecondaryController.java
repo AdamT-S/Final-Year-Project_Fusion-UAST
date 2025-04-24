@@ -9,8 +9,6 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.ProgressBar;
 import javafx.stage.Stage;
-import javafx.application.Platform;
-import javafx.concurrent.Task;
 
 public class SecondaryController {
     @FXML

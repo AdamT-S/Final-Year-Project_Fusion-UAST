@@ -1,5 +1,6 @@
 package com.example;
 import java.io.IOException;
+import com.example.startup;
 
 
 public class Main {
@@ -10,13 +11,14 @@ public class Main {
         CommandLineClass Test = new CommandLineClass();
         FileRead file = new FileRead();
 
-        
+
+        launchStartup.fileCreation();
         /*String directory = "/home/kali/Final Year Project/Final-Year-Project-Automated-PenTest/Android-InsecureBankv2-master/InsecureBankv2/app/src/main/AndroidManifest.xml";
         Test.ListDir();
         file.ReadManifest(directory);
         Test.PrintAllFiles("/home/kali/Final Year Project/Final-Year-Project-Automated-PenTest/Android-InsecureBankv2-master/InsecureBankv2");
         Test.FlagDangerousFiles("/home/kali/Final Year Project/Final-Year-Project-Automated-PenTest/Android-InsecureBankv2-master");*/
-        Test.DASTCommand("/home/kali/Final Year Project/Final-Year-Project-Automated-PenTest/Coding/src/main/java");
+        Test.DASTCommand("/home/kali/test/VulnerableApp.java");
     }
 }
     
