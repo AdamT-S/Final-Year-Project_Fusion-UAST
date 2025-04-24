@@ -3,6 +3,12 @@ package com.example;
 import java.io.File;
 
 public class startup {
+
+    CommandLineClass Test = new CommandLineClass();
+    void installers(){
+        
+        
+    }
     void fileCreation(){
 
         File Fusion = new File("/home/kali/Fusion-UAST");
