@@ -2,6 +2,8 @@ package com.example;
 
 import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.nio.file.FileVisitResult;
@@ -50,7 +52,7 @@ public class CommandLineClass{
         try {
             compileProcess = compileBuilder.start();
             compileProcess.waitFor();
-        } catch (IOException |InterruptedException e) {
+        } catch (IOException | InterruptedException e) {
             e.printStackTrace();
         } 
         
@@ -171,4 +173,26 @@ public class CommandLineClass{
         }
     
     }
+
+    public void reportFile() throws FileNotFoundException{
+        BufferedReader reader;
+        Path fusionOutput = Paths.get("home/kali/fusion-UAST");
+        try {
+            Files.walkFileTree(fusionOutput, new SimpleFileVisitor<Path>()
+            {
+                @Override
+                public FileVisitResult visitFile(Path file, BasicFileAttributes attrs) throws IOException{
+                    if(file.endsWith("_output.txt"))
+                    {
+                        
+                    }
+                    return FileVisitResult.CONTINUE;
+                } 
+            });
+        }
+        catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+    
 }
