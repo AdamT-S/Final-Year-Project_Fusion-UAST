@@ -2,6 +2,7 @@ package com.example;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -14,8 +15,32 @@ public class FileRead{
     List<String> permList = new ArrayList<>();
     List<String> dangerousFileList = new ArrayList<>();
 
+    public Runnable ReadWholeFile(String FileName, String outputFile)
+    {
+        try{
+            FileWriter writer = new FileWriter(outputFile, true);
+            BufferedReader reader = new BufferedReader(new FileReader(FileName));
+            String line = reader.readLine();
+
+            while(line != null)
+            {
+                String fileContent = reader.readLine();
+                writer.write(fileContent);
+                System.out.println("Data transfered succesfully");
+            }
+            reader.close();
+            writer.close();
+        }
+        catch (IOException e)
+        {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
     //Read the manifest files and its permissions
-    public Runnable ReadManifest(String FileName){
+    public Runnable ReadManifest(String FileName)
+    {
         //This ensures that if the file returns with an error that the system doesnt crash
         try{
             BufferedReader reader = new BufferedReader(new FileReader(FileName));
