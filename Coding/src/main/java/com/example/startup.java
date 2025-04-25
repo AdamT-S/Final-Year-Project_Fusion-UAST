@@ -35,5 +35,7 @@ public class startup {
                 return;
             }
         }
+
+        File finalReport = new File("home/kali/Fusion-UAST/Report.txt");
     }
 }
