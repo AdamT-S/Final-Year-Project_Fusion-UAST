@@ -3,7 +3,6 @@ package com.example;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.nio.file.FileVisitResult;
@@ -14,7 +13,7 @@ import java.nio.file.SimpleFileVisitor;
 import java.nio.file.attribute.BasicFileAttributes;;
 
 public class CommandLineClass{
-    private FileRead ReadFlagFiles = new FileRead();
+    private FileRead FileReader = new FileRead();
 
     void CommandLineRun(String CommandString, String FilePath){
         try{
@@ -92,7 +91,7 @@ public class CommandLineClass{
                     System.out.println("Visited " + file);
                     if(file.toString().contains("Manifest"))
                     {
-                        ReadFlagFiles.ReadManifest(file.toString());
+                        FileReader.ReadManifest(file.toString());
                         return FileVisitResult.TERMINATE;
                         
                     }
@@ -110,7 +109,7 @@ public class CommandLineClass{
         String SAST_Sgrep = "semgrep scan --config auto " + "\"" + Directory + "\""+ " --output /home/kali/Fusion-UAST/SemgrepScan.txt --text";
         System.out.println(SAST_Sgrep);
         CommandLineRun(SAST_Sgrep, Directory);
-        ReadFlagFiles.ReadFlaggedFiles("/home/kali/Fusion-UAST/SemgrepScan.txt", Directory);
+        FileReader.ReadFlaggedFiles("/home/kali/Fusion-UAST/SemgrepScan.txt", Directory);
                 return null;
     }
     
@@ -175,8 +174,7 @@ public class CommandLineClass{
     }
 
     public void reportFile() throws FileNotFoundException{
-        BufferedReader reader;
-        Path fusionOutput = Paths.get("home/kali/fusion-UAST");
+        Path fusionOutput = Paths.get("home/kali/Fusion-UAST");
         try {
             Files.walkFileTree(fusionOutput, new SimpleFileVisitor<Path>()
             {
@@ -184,7 +182,7 @@ public class CommandLineClass{
                 public FileVisitResult visitFile(Path file, BasicFileAttributes attrs) throws IOException{
                     if(file.endsWith("_output.txt"))
                     {
-                        
+                        FileReader.ReadWholeFile(file.toString(), "home/kali/Fusion-UAST/");
                     }
                     return FileVisitResult.CONTINUE;
                 } 
