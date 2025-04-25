@@ -17,7 +17,7 @@
 <BorderPane xmlns:fx="http://javafx.com/fxml" fx:controller="com.example.PrimaryController">
     <top>
         <VBox alignment="CENTER" spacing="20.0">
-            <Label text="Fusion-UAST (Unified Application Security Testing)" style="-fx-font-size: 24px;"/>
+            <Label text="Fusion-UAST (Unified Application Security Testing)" style="-fx-font-size: 22px;"/>
             <Label text="Select the tests you wish to run and upload an apk file to analyse" style="-fx-font-size: 14px;"/>
             <padding> 
                <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" /> 
