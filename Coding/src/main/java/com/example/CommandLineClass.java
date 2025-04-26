@@ -20,7 +20,7 @@ public class CommandLineClass{
             // Print the directory for debugging purposes
             System.out.println("Directory: " + FilePath);
             // Split the command using a more robust method
-            String[] commandArray = {CommandString}; // Using bash to handle the command
+            String[] commandArray = {"/bin/bash", "-c", CommandString}; // Using bash to handle the command
             //Build the command that will be run in the terminal
             ProcessBuilder command = new ProcessBuilder(commandArray);
             //Lets me see all the errors in one location
@@ -42,6 +42,7 @@ public class CommandLineClass{
             e.printStackTrace();
         } 
     }
+    
 
     public void ComplexCommandRun(String[] compileCommand){
 
@@ -106,10 +107,10 @@ public class CommandLineClass{
     }
     //This flags all dangerous files found by analysis tools
     Runnable FlagDangerousFiles(String Directory) throws IOException{
-        String SAST_Sgrep = "semgrep scan --config auto " + "\"" + Directory + "\""+ " --output /home/kali/Fusion-UAST/SemgrepScan.txt --text";
+        String SAST_Sgrep = "semgrep scan --config auto " + "\"" + Directory + "\""+ " --output /home/kali/Fusion-UAST/SemgrepOutput.txt --text";
         System.out.println(SAST_Sgrep);
         CommandLineRun(SAST_Sgrep, Directory);
-        FileReader.ReadFlaggedFiles("/home/kali/Fusion-UAST/SemgrepScan.txt", Directory);
+        FileReader.ReadFlaggedFiles("/home/kali/Fusion-UAST/SemgrepOutput.txt", Directory);
                 return null;
     }
     

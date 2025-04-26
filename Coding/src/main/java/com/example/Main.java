@@ -16,9 +16,10 @@ public class Main {
         /*String directory = "/home/kali/Final Year Project/Final-Year-Project-Automated-PenTest/Android-InsecureBankv2-master/InsecureBankv2/app/src/main/AndroidManifest.xml";
         Test.ListDir();
         file.ReadManifest(directory);
-        Test.PrintAllFiles("/home/kali/Final Year Project/Final-Year-Project-Automated-PenTest/Android-InsecureBankv2-master/InsecureBankv2");
-        Test.FlagDangerousFiles("/home/kali/Final Year Project/Final-Year-Project-Automated-PenTest/Android-InsecureBankv2-master");*/
+        Test.PrintAllFiles("/home/kali/Final Year Project/Final-Year-Project-Automated-PenTest/Android-InsecureBankv2-master/InsecureBankv2");*/
+        Test.FlagDangerousFiles("/home/kali/test");
         Test.DASTCommand("/home/kali/test/VulnerableApp.java");
+        
     }
 }
     
