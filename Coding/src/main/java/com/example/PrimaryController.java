@@ -114,7 +114,7 @@ private void changePage() throws Exception {
                 });
             }
             if(CheckDAST.isSelected()){
-                Test.DASTCommand(DragandDropLabel.getText());
+                commands.add(() -> Test.DASTCommand(DragandDropLabel.getText()));
             }
         }
         
