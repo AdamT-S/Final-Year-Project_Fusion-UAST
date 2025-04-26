@@ -29,15 +29,6 @@ public class PrimaryController {
     CommandLineClass Test = new CommandLineClass();
     FileRead file = new FileRead();
 
-    private void installer()
-    {
-        Test.CommandLineRun("sudo apt update", null);
-        Test.CommandLineRun("sudo apt upgrade", null);
-        Test.CommandLineRun("sudo apt install java", null);
-        Test.CommandLineRun("sudo apt install semgrep", null);
-        Test.CommandLineRun("Y", null);
-        
-    }
 
     @FXML
     public void initialize() {
@@ -68,10 +59,16 @@ public class PrimaryController {
     }
 
     @FXML
+    CheckMenuItem RunAllTests;
+
+    @FXML
     CheckMenuItem CheckPerms;
 
     @FXML
     CheckMenuItem CheckSAST;
+
+    @FXML
+    CheckMenuItem CheckDAST;
 
     
 
@@ -91,19 +88,36 @@ private void changePage() throws Exception {
         Parent root = loader.load();
         SecondaryController SecCon = loader.getController();
 
-        // Wrap method calls in lambda expressions
-        if (CheckPerms.isSelected()) {
+        if (RunAllTests.isSelected() || !RunAllTests.isSelected() && !(CheckPerms.isSelected() | CheckSAST.isSelected() | CheckDAST.isSelected())){
             commands.add(() -> Test.SearchFiles(DragandDropLabel.getText()));
-        }
-        if (CheckSAST.isSelected()) {
             commands.add(() -> {
                 try {
                     Test.FlagDangerousFiles(DragandDropLabel.getText());
+                    Test.DASTCommand(DragandDropLabel.getText());
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
             });
         }
+        else{
+            // Wrap method calls in lambda expressions
+            if (CheckPerms.isSelected()) {
+                commands.add(() -> Test.SearchFiles(DragandDropLabel.getText()));
+            }
+            if (CheckSAST.isSelected()) {
+                commands.add(() -> {
+                    try {
+                        Test.FlagDangerousFiles(DragandDropLabel.getText());
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                });
+            }
+            if(CheckDAST.isSelected()){
+                Test.DASTCommand(DragandDropLabel.getText());
+            }
+        }
+        
 
         Scene scene = new Scene(root);
         stage.setScene(scene);
