@@ -93,11 +93,12 @@ private void changePage() throws Exception {
             commands.add(() -> {
                 try {
                     Test.FlagDangerousFiles(DragandDropLabel.getText());
-                    Test.DASTCommand(DragandDropLabel.getText());
+                    
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
             });
+            commands.add(() -> Test.DASTCommand(DragandDropLabel.getText()));
         }
         else{
             // Wrap method calls in lambda expressions
