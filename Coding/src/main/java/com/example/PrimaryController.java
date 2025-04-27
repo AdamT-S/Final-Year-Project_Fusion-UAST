@@ -28,7 +28,7 @@ public class PrimaryController {
 
     CommandLineClass Test = new CommandLineClass();
     FileRead file = new FileRead();
-
+    private String testFile;
 
     @FXML
     public void initialize() {
@@ -55,6 +55,7 @@ public class PrimaryController {
             }
             event.setDropCompleted(check);
             event.consume();
+            testFile = DragandDropLabel.getText();
         });
     
     }
@@ -73,6 +74,8 @@ public class PrimaryController {
 
     
 
+    
+
     //Submit button swaps to the next page... needs to have checks before it can work
     @FXML
     private Button submitButton;
@@ -83,6 +86,7 @@ public class PrimaryController {
     @FXML
 private void changePage() throws Exception {
     if (DragandDropLabel.getText().contains("/") && (CheckPerms.isSelected() || CheckSAST.isSelected() || CheckDAST.isSelected() || RunAllTests.isSelected())) {
+        System.out.println(testFile);
         List<Runnable> commands = new ArrayList<>();
         Stage stage = (Stage) submitButton.getScene().getWindow();
         FXMLLoader loader = new FXMLLoader(getClass().getResource("secondary.fxml"));
