@@ -146,7 +146,7 @@ public class CommandLineClass{
                             }
                     
                             System.out.println("Creating JAR file...");
-                            String[] jarFileMaker = {"jar", "cvf", jarFilePath, "-C", "/home/kali/Fusion-UAST", "VulnerableApp.class"};
+                            String[] jarFileMaker = {"/bin/bash", "-c", "jar cvf " + jarFilePath + " -C /home/kali/Fusion-UAST VulnerableApp.class"};
                             ComplexCommandRun(jarFileMaker);
                             System.out.println("JAR file created: " + jarFilePath);
                     
@@ -157,7 +157,7 @@ public class CommandLineClass{
                                 System.exit(0);
                             }
                             System.out.println("Generating SBOM...");
-                            String[] sbomFileMaker = {"syft", "scan", jarFilePath, "-o", "cyclonedx-json >", sbomFilePath};
+                            String[] sbomFileMaker = {"/bin/bash", "-c", "syft scan " + jarFilePath + " -o cyclonedx-json > " + sbomFilePath};
                             ComplexCommandRun(sbomFileMaker);
                             System.out.println("SBOM generated: " + sbomFilePath);
                     
@@ -170,9 +170,9 @@ public class CommandLineClass{
                     
                             // Step 4: Run Grype scan on the SBOM
                             System.out.println("Scanning with Grype...");
-                            String[] grypeScan = {"grype", "sbom:" + sbomFilePath};
+                            String grypeOutputPath = (classFilePath.replace(".class", ".txt"));
+                            String[] grypeScan = {"grype sbom:" + sbomFilePath + " > " + grypeOutputPath};
                             ComplexCommandRun(grypeScan);
-                            System.out.println("Grype test completed. Results saved in: " + outputFilePath);
                         }         
                             
                                     return FileVisitResult.CONTINUE;
