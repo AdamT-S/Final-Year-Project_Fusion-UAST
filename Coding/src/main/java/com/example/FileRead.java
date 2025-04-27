@@ -22,12 +22,15 @@ public class FileRead{
             BufferedReader reader = new BufferedReader(new FileReader(FileName));
             String line = reader.readLine();
 
+            writer.write(FileName + ": " +System.lineSeparator());
+
             while(line != null)
             {
-                String fileContent = reader.readLine();
-                writer.write(fileContent);
+                writer.write(line+System.lineSeparator());
                 System.out.println("Data transfered succesfully");
+                line = reader.readLine();
             }
+            writer.write(System.lineSeparator()+System.lineSeparator());
             reader.close();
             writer.close();
         }

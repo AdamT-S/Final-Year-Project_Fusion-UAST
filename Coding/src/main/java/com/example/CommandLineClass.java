@@ -170,7 +170,7 @@ public class CommandLineClass{
                     
                             // Step 4: Run Grype scan on the SBOM
                             System.out.println("Scanning with Grype...");
-                            String grypeOutputPath = (classFilePath.replace(".class", ".txt"));
+                            String grypeOutputPath = (classFilePath.replace(".class", "_output.txt").replace("/tempFiles", ""));
                             String grypeCommand = "grype sbom:" + sbomFilePath + " > " + grypeOutputPath;
                             String[] grypeScan = {"/bin/bash", "-c", grypeCommand};
                             ComplexCommandRun(grypeScan);
@@ -183,19 +183,25 @@ public class CommandLineClass{
             e.printStackTrace();
         }
         
+        try {
+            reportFile();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
     
     }
 
     public void reportFile() throws FileNotFoundException{
-        Path fusionOutput = Paths.get("home/kali/Fusion-UAST");
+        Path fusionOutput = Paths.get("/home/kali/Fusion-UAST/");
+        File reportOutput = new File("/home/kali/Fusion-UAST/FinalReport.txt");
         try {
             Files.walkFileTree(fusionOutput, new SimpleFileVisitor<Path>()
             {
                 @Override
                 public FileVisitResult visitFile(Path file, BasicFileAttributes attrs) throws IOException{
-                    if(file.endsWith("_output.txt"))
+                    if(file.toString().endsWith("_output.txt"))
                     {
-                        FileReader.ReadWholeFile(file.toString(), "home/kali/Fusion-UAST/");
+                        FileReader.ReadWholeFile(file.toString(), reportOutput.toString());
                     }
                     return FileVisitResult.CONTINUE;
                 } 
@@ -204,6 +210,8 @@ public class CommandLineClass{
         catch (IOException e) {
             e.printStackTrace();
         }
+
     }
+    
     
 }
