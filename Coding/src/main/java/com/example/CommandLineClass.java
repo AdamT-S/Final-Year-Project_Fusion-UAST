@@ -51,11 +51,11 @@ public class CommandLineClass{
         Process compileProcess;
         try {
             compileProcess = compileBuilder.start();
-            System.out.println("Command worked");
             compileProcess.waitFor();
         } catch (IOException | InterruptedException e) {
             e.printStackTrace();
         } 
+        System.out.println("Command worked");
         
     }
     
@@ -171,7 +171,8 @@ public class CommandLineClass{
                             // Step 4: Run Grype scan on the SBOM
                             System.out.println("Scanning with Grype...");
                             String grypeOutputPath = (classFilePath.replace(".class", ".txt"));
-                            String[] grypeScan = {"grype sbom:" + sbomFilePath + " > " + grypeOutputPath};
+                            String grypeCommand = "grype sbom:" + sbomFilePath + " > " + grypeOutputPath;
+                            String[] grypeScan = {"/bin/bash", "-c", grypeCommand};
                             ComplexCommandRun(grypeScan);
                         }         
                             
