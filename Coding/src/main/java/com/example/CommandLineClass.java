@@ -126,14 +126,14 @@ public class CommandLineClass{
                     System.out.println("Visited " + file);
                     if(file.toString().endsWith(".java") && !file.getFileName().toString().startsWith("."))
                     {
-                        String classFilePath = "/home/kali/Fusion-UAST/" + file.toString().substring(file.toString().lastIndexOf('/') + 1).replace(".java", ".class");
+                        String classFilePath = "/home/kali/Fusion-UAST/tempFiles/" + file.toString().substring(file.toString().lastIndexOf('/') + 1).replace(".java", ".class");
                         String jarFilePath = classFilePath.replace(".class", ".jar");
-                        String sbomFilePath = "/home/kali/Fusion-UAST/" + file.getFileName().toString().replace(".java", "_sbom.json");
-                        String outputFilePath = "/home/kali/Fusion-UAST/";
+                        String sbomFilePath = "/home/kali/Fusion-UAST/tempFiles/" + file.getFileName().toString().replace(".java", "_sbom.json");
+                        String outputFilePath = "/home/kali/Fusion-UAST/tempFiles/";
                     
                     
                             System.out.println("Attempting to make class file");
-                            String[] classFileMaker = {"javac", "-d", "/home/kali/Fusion-UAST", file.toString()};
+                            String[] classFileMaker = {"javac", "-d", outputFilePath, file.toString()};
                             ComplexCommandRun(classFileMaker);
                             System.out.println(classFilePath);
                             System.out.println("class file created successfully");
@@ -146,7 +146,7 @@ public class CommandLineClass{
                             }
                     
                             System.out.println("Creating JAR file...");
-                            String[] jarFileMaker = {"/bin/bash", "-c", "jar cvf " + jarFilePath + " -C /home/kali/Fusion-UAST " + classFile.toString().substring(classFile.toString().lastIndexOf("/") +1)};
+                            String[] jarFileMaker = {"/bin/bash", "-c", "jar cvf " + jarFilePath + " -C /home/kali/Fusion-UAST/tempFiles " + classFile.toString().substring(classFile.toString().lastIndexOf("/") +1)};
                             ComplexCommandRun(jarFileMaker);
                             System.out.println("JAR file created: " + jarFilePath);
                     
