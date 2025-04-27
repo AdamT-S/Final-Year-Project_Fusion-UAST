@@ -51,6 +51,7 @@ public class CommandLineClass{
         Process compileProcess;
         try {
             compileProcess = compileBuilder.start();
+            System.out.println("Command worked");
             compileProcess.waitFor();
         } catch (IOException | InterruptedException e) {
             e.printStackTrace();
@@ -116,62 +117,71 @@ public class CommandLineClass{
     }
     
     public void DASTCommand(String filepath) {
-        
-    
-        String classFilePath = "/home/kali/Fusion-UAST/" + filepath.substring(filepath.lastIndexOf('/') + 1).replace(".java", ".class");
-        String jarFilePath = classFilePath.replace(".class", ".jar");
-        String sbomFilePath = classFilePath.replace(".class", "_sbom.json");
-        String outputFilePath = "/home/kali/Fusion-UAST/DASTOutputs/";
+        Path findFiles = Paths.get(filepath);
     
         try {
-    
-            System.out.println("Attempting to make class file");
-            String[] classFileMaker = {"javac", "-d", "/home/kali/Fusion-UAST", filepath};
-            ComplexCommandRun(classFileMaker);
-            System.out.println("class file created successfully");
-    
-            // Verify .class file exists
-            File classFile = new File(classFilePath);
-            if (!classFile.exists()) {
-                System.err.println("Error: .class file not found: " + classFilePath);
-                return;
-            }
-    
-            System.out.println("Creating JAR file...");
-            String[] jarFileMaker = {"jar", "cvf", jarFilePath, "-C", "/home/kali/Fusion-UAST", "VulnerableApp.class"};
-            ComplexCommandRun(jarFileMaker);
-            System.out.println("JAR file created: " + jarFilePath);
-    
-            // Verify .jar file exists
-            File jarFile = new File(jarFilePath);
-            if (!jarFile.exists()) {
-                System.err.println("Error: JAR file not found: " + jarFilePath);
-                return;
-            }
-    
-            System.out.println("Generating SBOM...");
-            String[] sbomFileMaker = {"syft", "scan", jarFilePath, "-o", "cyclonedx-json"};
-            ComplexCommandRun(sbomFileMaker);
-            System.out.println("SBOM generated: " + sbomFilePath);
-    
-            // Verify SBOM file exists
-            File sbomFile = new File(sbomFilePath);
-            if (!sbomFile.exists()) {
-                System.err.println("Error: SBOM file not found: " + sbomFilePath);
-                return;
-            }
-    
-            // Step 4: Run Grype scan on the SBOM
-            System.out.println("Scanning with Grype...");
-            String[] grypeScan = {"grype", "sbom:" + sbomFilePath};
-            ComplexCommandRun(grypeScan);
-            System.out.println("Grype test completed. Results saved in: " + outputFilePath);
-    
-        } 
-        catch (Exception e) {
-            System.err.println("An error occurred: " + e.getMessage());
+            Files.walkFileTree(findFiles, new SimpleFileVisitor<Path>(){
+                @Override
+                public FileVisitResult visitFile(Path file, BasicFileAttributes attrs) throws IOException{
+                    System.out.println("Visited " + file);
+                    if(file.toString().contains(".java"))
+                    {
+                        String classFilePath = "/home/kali/Fusion-UAST/" + file.toString().substring(file.toString().lastIndexOf('/') + 1).replace(".java", ".class");
+                        String jarFilePath = classFilePath.replace(".class", ".jar");
+                        String sbomFilePath = "/home/kali/Fusion-UAST/" + file.getFileName().toString().replace(".java", "_sbom.json");
+                        String outputFilePath = "/home/kali/Fusion-UAST/";
+                    
+                    
+                            System.out.println("Attempting to make class file");
+                            String[] classFileMaker = {"javac", "-d", "/home/kali/Fusion-UAST", file.toString()};
+                            ComplexCommandRun(classFileMaker);
+                            System.out.println(classFilePath);
+                            System.out.println("class file created successfully");
+                    
+                            // Verify .class file exists
+                            File classFile = new File(classFilePath);
+                            if (!classFile.exists()) {
+                                System.err.println("Error: .class file not found: " + classFilePath);
+                                System.exit(0);
+                            }
+                    
+                            System.out.println("Creating JAR file...");
+                            String[] jarFileMaker = {"jar", "cvf", jarFilePath, "-C", "/home/kali/Fusion-UAST", "VulnerableApp.class"};
+                            ComplexCommandRun(jarFileMaker);
+                            System.out.println("JAR file created: " + jarFilePath);
+                    
+                            // Verify .jar file exists
+                            File jarFile = new File(jarFilePath);
+                            if (!jarFile.exists()) {
+                                System.err.println("Error: JAR file not found: " + jarFilePath);
+                                System.exit(0);
+                            }
+                            System.out.println("Generating SBOM...");
+                            String[] sbomFileMaker = {"syft", "scan", jarFilePath, "-o", "cyclonedx-json >", sbomFilePath};
+                            ComplexCommandRun(sbomFileMaker);
+                            System.out.println("SBOM generated: " + sbomFilePath);
+                    
+                            // Verify SBOM file exists
+                            File sbomFile = new File(sbomFilePath);
+                            if (!sbomFile.exists()) {
+                                System.err.println("Error: SBOM file not found: " + sbomFilePath);
+                                System.exit(0);
+                            }
+                    
+                            // Step 4: Run Grype scan on the SBOM
+                            System.out.println("Scanning with Grype...");
+                            String[] grypeScan = {"grype", "sbom:" + sbomFilePath};
+                            ComplexCommandRun(grypeScan);
+                            System.out.println("Grype test completed. Results saved in: " + outputFilePath);
+                        }         
+                            
+                                    return FileVisitResult.CONTINUE;
+                                }                
+                            });
+        } catch (IOException e){
             e.printStackTrace();
         }
+        
     
     }
 

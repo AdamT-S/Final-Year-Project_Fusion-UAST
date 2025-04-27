@@ -81,7 +81,7 @@ public class PrimaryController {
 
     @FXML
 private void changePage() throws Exception {
-    if (DragandDropLabel.getText().contains("/") && (CheckPerms.isSelected() || CheckSAST.isSelected())) {
+    if (DragandDropLabel.getText().contains("/") && (CheckPerms.isSelected() || CheckSAST.isSelected() || CheckDAST.isSelected() || RunAllTests.isSelected())) {
         List<Runnable> commands = new ArrayList<>();
         Stage stage = (Stage) submitButton.getScene().getWindow();
         FXMLLoader loader = new FXMLLoader(getClass().getResource("secondary.fxml"));

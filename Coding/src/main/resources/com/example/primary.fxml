@@ -27,7 +27,7 @@
     <left>
         <VBox spacing="10.0">
             <Label text="" style="-fx-font-size: 16px;"/>
-            <MenuButton text = "Select Testing Tools">
+            <MenuButton fx:id="TestSelection" text = "Select Testing Tools">
                <items>
                     <CheckMenuItem fx:id="RunAllTests" text="Run All Tests"/>
                     <CheckMenuItem fx:id="CheckPerms" text="Check Permissions" />
