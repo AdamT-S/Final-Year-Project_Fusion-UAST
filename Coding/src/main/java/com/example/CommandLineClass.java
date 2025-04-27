@@ -124,7 +124,7 @@ public class CommandLineClass{
                 @Override
                 public FileVisitResult visitFile(Path file, BasicFileAttributes attrs) throws IOException{
                     System.out.println("Visited " + file);
-                    if(file.toString().contains(".java"))
+                    if(file.toString().endsWith(".java") && !file.getFileName().toString().startsWith("."))
                     {
                         String classFilePath = "/home/kali/Fusion-UAST/" + file.toString().substring(file.toString().lastIndexOf('/') + 1).replace(".java", ".class");
                         String jarFilePath = classFilePath.replace(".class", ".jar");
@@ -146,7 +146,7 @@ public class CommandLineClass{
                             }
                     
                             System.out.println("Creating JAR file...");
-                            String[] jarFileMaker = {"/bin/bash", "-c", "jar cvf " + jarFilePath + " -C /home/kali/Fusion-UAST VulnerableApp.class"};
+                            String[] jarFileMaker = {"/bin/bash", "-c", "jar cvf " + jarFilePath + " -C /home/kali/Fusion-UAST " + classFile.toString().substring(classFile.toString().lastIndexOf("/") +1)};
                             ComplexCommandRun(jarFileMaker);
                             System.out.println("JAR file created: " + jarFilePath);
                     

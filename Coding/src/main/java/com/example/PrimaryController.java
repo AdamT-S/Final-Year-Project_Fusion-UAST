@@ -32,6 +32,7 @@ public class PrimaryController {
 
     @FXML
     public void initialize() {
+        Main.StartProgram();
         //When a file is dragged onto the drag and drop box it will run this command (getting the file path)
         DragandDrop.setOnDragOver(event -> {
             if (event.getGestureSource() != DragandDrop && event.getDragboard().hasFiles()) {
