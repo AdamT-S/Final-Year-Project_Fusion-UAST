@@ -17,7 +17,7 @@ public class Main {
         Test.ListDir();
         file.ReadManifest(directory);
         Test.PrintAllFiles("/home/kali/Final Year Project/Final-Year-Project-Automated-PenTest/Android-InsecureBankv2-master/InsecureBankv2");*/
-        Test.FlagDangerousFiles("/home/kali/test");
+        //Test.FlagDangerousFiles("/home/kali/test");
         Test.DASTCommand("/home/kali/test/VulnerableApp.java");
         
     }
