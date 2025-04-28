@@ -170,7 +170,7 @@ public class CommandLineClass{
                     
                             // Step 4: Run Grype scan on the SBOM
                             System.out.println("Scanning with Grype...");
-                            String grypeOutputPath = (classFilePath.replace(".class", "_output.txt").replace("/tempFiles", ""));
+                            String grypeOutputPath = (classFilePath.replace(".class", "_grypeOutput.txt").replace("/tempFiles", ""));
                             String grypeCommand = "grype sbom:" + sbomFilePath + " > " + grypeOutputPath;
                             String[] grypeScan = {"/bin/bash", "-c", grypeCommand};
                             ComplexCommandRun(grypeScan);
