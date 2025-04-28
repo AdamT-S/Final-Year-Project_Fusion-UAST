@@ -149,12 +149,13 @@ private void changePage() throws Exception {
     @FXML
     private Button jumpPageButton;
     @FXML
-    void Page3() throws Exception
-    {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("results.fxml"));
-        Parent root = loader.load();
+    void Page3() throws Exception {
         Stage stage = (Stage) jumpPageButton.getScene().getWindow();
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("results.fxml"));
+        Parent root = loader.load(); 
         Scene scene = new Scene(root);
+        ResultsController res = loader.getController();
+        res.onStart();
         stage.setScene(scene);
     }
     

@@ -2,41 +2,34 @@ package com.example;
 
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
+import javafx.scene.control.TextArea;
 import javafx.fxml.FXML;
 import javafx.scene.layout.StackPane;
+
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
 public class ResultsController {
+    
     @FXML
-    private ListView<String> PermsList;
+    private TextArea ReportText;
 
-    private ObservableList<String> attempt = FXCollections.observableArrayList();
-   
+    private static final String FILE_PATH = "/home/kali/Fusion-UAST/Final_Report.md";
 
     @FXML
-    public void onStart()
-    {
-        for (int i = 0; i <= 10; i++)
-        {
-            String str = Integer.toString(i);
-            attempt.add(str);
+    public void onStart() {
+        try {
+            String content = new String(Files.readAllBytes(Paths.get(FILE_PATH)));
+            ReportText.setText(content);
+        } catch (IOException e) {
+            ReportText.setText("Error reading file: " + e.getMessage());
         }
     }
 
-    @FXML
-    private StackPane ManifestPerms;
-
-    @FXML
-    private Label ManifestPermsLabel;
-
-
-
-    @FXML
-    public void initialize() {
-        onStart();
-        PermsList.setItems(attempt);
-    }
 
 }
 

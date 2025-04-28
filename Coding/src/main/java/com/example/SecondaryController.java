@@ -35,15 +35,16 @@ public class SecondaryController {
         
         if(progress_addit >= 1)
         {
+
             Stage stage = (Stage) CodeLoading.getScene().getWindow();
             FXMLLoader loader = new FXMLLoader(getClass().getResource("results.fxml"));
             Parent root;
             try {
-                root = loader.load();
+                root = loader.load(); 
                 Scene scene = new Scene(root);
-                stage.setScene(scene);
                 ResultsController res = loader.getController();
                 res.onStart();
+            stage.setScene(scene);
             } catch (IOException e) {
                 e.printStackTrace();
             }
