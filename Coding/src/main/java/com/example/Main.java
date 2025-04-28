@@ -15,6 +15,7 @@ public class Main {
         
         CommandLineClass Test = new CommandLineClass();
         FileRead file = new FileRead();
+        ReportGenerator report = new ReportGenerator();
 
 
         
@@ -23,7 +24,9 @@ public class Main {
         file.ReadManifest(directory);
         Test.PrintAllFiles("/home/kali/Final Year Project/Final-Year-Project-Automated-PenTest/Android-InsecureBankv2-master/InsecureBankv2");*/
         //Test.FlagDangerousFiles("/home/kali/test");
-        Test.DASTCommand("/home/kali/test/");
+        //Test.DASTCommand("/home/kali/test/");
+        //report.mdMaker("home/kali/Fusion-UAST/Test.md");
+        report.DAST_Portion("home/kali/Fusion-UAST/grypeoutputs.txt");
         
     }
 }
