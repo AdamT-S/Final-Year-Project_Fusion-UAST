@@ -1,6 +1,7 @@
 package com.example;
 
 import java.io.BufferedWriter;
+import java.io.Console;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
@@ -92,43 +93,51 @@ public class ReportGenerator {
                             }
     
                             int counterTotal = critCounter + highCounter + mediumCounter + lowCounter + unknownCounter;
-                            int critPercent = (critCounter*100) / counterTotal;
-                            int highPercent = (highCounter*100) / counterTotal;
-                            int mediumPercent = (mediumCounter*100) / counterTotal;
-                            int lowPercent = (lowCounter*100) / counterTotal;
-                            int unknownPercent = (unknownCounter*100) / counterTotal;
-                            writer.write("\n#Number of each type of vulnerabilities within " + file + ": \n");
-                            writer.write("Critical errors: " + critPercent+"% (" + critCounter + " vulnerabilities)\n");
-                            writer.write("High level errors: " + highPercent+"% (" + highCounter + "vulnerabilities)\n");
-                            writer.write("Medium level errors: " + mediumPercent+"% (" + mediumCounter + "vulnerabilities)\n");
-                            writer.write("Low level errors: " + lowPercent+"% (" + lowCounter + "vulnerabilities)\n");
-                            writer.write("Unknown errors: " + unknownPercent+"% (" + unknownCounter + "vulnerabilities)\n\n");
-                            
-                            if(unknownCounter > 0)
+                           
+                            if(counterTotal == 0)
                             {
-                                writer.write("**************\nAn unknown vulnerability is a vulnerability that is not currently in the testing database and will require further examination. More details of all of the vulnerabilities found will be available in the 'Detailed' report.\n**************\n");
+                                System.out.println("This is the error thats been plaguing you");
                             }
-                            if((critCounter | highCounter) >= 1 )
-                            {
-                                writer.write("***This application has very dangerous vulnerabilities that need to be addressed immediately. It is recommended you provide these reports to a cyber security consultant immediately.***\n");
-                            }
-                            if(mediumCounter >= 2)
-                            {
-                                writer.write("\nThere are " + mediumCounter + " vulnerabilities within this program, these vulnerabilities will need fixing as soon as possible but it is not an urgent fix.\n");
-                            }
-                            if(lowCounter >= 5)
-                            {
-                                writer.write("\nThere are a few low level vulnerabilities present. These vulnerabilities are negligible to the running of the program, however it is always best to employ a zero tolerance policy against all vulnerabilities and should have these fixed.\n");
-                            }
-                            if(lowCounter <= 4)
-                            {
-                                writer.write("\nThere is a small amount of low level vulnerabilities present. These should be fixed, but posses a minor level of threat to the program.\n");
-                            }
-                            if((critCounter & highCounter & mediumCounter & lowCounter & unknownCounter) == 0)
-                            {
-                                writer.write("This program has no vulnerabilities.\n");
-                            }
+                            else{
+                               int critPercent = (critCounter*100) / counterTotal;
+                                int highPercent = (highCounter*100) / counterTotal;
+                                int mediumPercent = (mediumCounter*100) / counterTotal;
+                                int lowPercent = (lowCounter*100) / counterTotal;
+                                int unknownPercent = (unknownCounter*100) / counterTotal;
+                                writer.write("\n#Number of each type of vulnerabilities within " + file + ": \n");
+                                writer.write("Critical errors: " + critPercent+"% (" + critCounter + " vulnerabilities)\n");
+                                writer.write("High level errors: " + highPercent+"% (" + highCounter + "vulnerabilities)\n");
+                                writer.write("Medium level errors: " + mediumPercent+"% (" + mediumCounter + "vulnerabilities)\n");
+                                writer.write("Low level errors: " + lowPercent+"% (" + lowCounter + "vulnerabilities)\n");
+                                writer.write("Unknown errors: " + unknownPercent+"% (" + unknownCounter + "vulnerabilities)\n\n");
+                                
+                                if(unknownCounter > 0)
+                                {
+                                    writer.write("**************\nAn unknown vulnerability is a vulnerability that is not currently in the testing database and will require further examination. More details of all of the vulnerabilities found will be available in the 'Detailed' report.\n**************\n");
+                                }
+                                if((critCounter | highCounter) >= 1 )
+                                {
+                                    writer.write("***This application has very dangerous vulnerabilities that need to be addressed immediately. It is recommended you provide these reports to a cyber security consultant immediately.***\n");
+                                }
+                                if(mediumCounter >= 2)
+                                {
+                                    writer.write("\nThere are " + mediumCounter + " vulnerabilities within this program, these vulnerabilities will need fixing as soon as possible but it is not an urgent fix.\n");
+                                }
+                                if(lowCounter >= 5)
+                                {
+                                    writer.write("\nThere are a few low level vulnerabilities present. These vulnerabilities are negligible to the running of the program, however it is always best to employ a zero tolerance policy against all vulnerabilities and should have these fixed.\n");
+                                }
+                                if(lowCounter <= 4)
+                                {
+                                    writer.write("\nThere is a small amount of low level vulnerabilities present. These should be fixed, but posses a minor level of threat to the program.\n");
+                                }
+                                if((critCounter & highCounter & mediumCounter & lowCounter & unknownCounter) == 0)
+                                {
+                                    writer.write("This program has no vulnerabilities.\n");
+                                }
+                            } 
                         }
+                            
                         if(file.toString().contains("Semgrep")){
                             System.out.println("Running in sast report");
                             writer.write("\n##Static Application Security Analysis Results\n");
