@@ -145,5 +145,17 @@ private void changePage() throws Exception {
     void runTests() throws Exception{
         Main.main(null);
     }
+
+    @FXML
+    private Button jumpPageButton;
+    @FXML
+    void Page3() throws Exception
+    {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("results.fxml"));
+        Parent root = loader.load();
+        Stage stage = (Stage) jumpPageButton.getScene().getWindow();
+        Scene scene = new Scene(root);
+        stage.setScene(scene);
+    }
     
 }
