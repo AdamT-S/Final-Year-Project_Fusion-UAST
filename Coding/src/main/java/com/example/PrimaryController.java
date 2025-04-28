@@ -28,6 +28,7 @@ public class PrimaryController {
 
     CommandLineClass Test = new CommandLineClass();
     FileRead file = new FileRead();
+    ReportGenerator reportMaker = new ReportGenerator();
     private String testFile;
 
     @FXML
@@ -122,9 +123,11 @@ private void changePage() throws Exception {
             if(CheckDAST.isSelected()){
                 commands.add(() -> Test.DASTCommand(DragandDropLabel.getText()));
             }
+
+
         }
         
-
+        commands.add(() -> reportMaker.mdMaker(DragandDropLabel.getText()));
         Scene scene = new Scene(root);
         stage.setScene(scene);
         SecCon.increase(commands);
