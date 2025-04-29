@@ -17,7 +17,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 
 
-<AnchorPane xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.ResultsController">
+<AnchorPane xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.Frontend_Logic.ResultsController">
     <TextArea fx:id="ReportText" editable="false" wrapText="true">
         <AnchorPane.leftAnchor>0.0</AnchorPane.leftAnchor>
         <AnchorPane.rightAnchor>0.0</AnchorPane.rightAnchor>
