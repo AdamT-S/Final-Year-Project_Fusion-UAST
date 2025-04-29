@@ -13,7 +13,7 @@ public class APK_Manager
     private FileRead fileReader = new FileRead();
     CommandLineClass command = new CommandLineClass();
 
-    void decompiler(String APK)
+    public void decompiler(String APK)
     {    
         String decompile = "apktool d" + APK;
         command.commandLineRun(decompile, null);

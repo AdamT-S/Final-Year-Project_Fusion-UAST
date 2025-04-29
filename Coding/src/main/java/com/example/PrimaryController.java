@@ -112,10 +112,17 @@ private void changePage() throws Exception
         Parent root = loader.load();
         SecondaryController SecCon = loader.getController();
 
+        if(DragandDropLabel.getText().contains(".apk"))
+        {
+            commands.add(() -> apkManager.decompiler(DragandDropLabel.getText()));
+            DragandDropLabel.setText(DragandDropLabel.getText().replace(".apk", ""));
+            commands.add(() -> apkManager.getManifest(DragandDropLabel.getText()));
+        }
+
         //adding tests for running
         if (RunAllTests.isSelected() || !RunAllTests.isSelected() && CheckSAST.isSelected() | CheckDAST.isSelected())
         {
-            commands.add(() -> apkManager.getManifest(DragandDropLabel.getText()));
+            
             commands.add(() -> {
                 try
                 {
