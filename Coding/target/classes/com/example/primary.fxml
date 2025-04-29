@@ -14,7 +14,7 @@
 
 
 
-<BorderPane xmlns:fx="http://javafx.com/fxml" fx:controller="com.example.Frontend_Logic.PrimaryController">
+<BorderPane xmlns:fx="http://javafx.com/fxml" fx:controller="com.example.PrimaryController">
     <top>
         <VBox alignment="CENTER" spacing="20.0">
             <Label text="Fusion-UAST (Unified Application Security Testing)" style="-fx-font-size: 22px;"/>

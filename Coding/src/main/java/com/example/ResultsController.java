@@ -1,4 +1,4 @@
-package com.example.Frontend_Logic;
+package com.example;
 
 import javafx.scene.control.TextArea;
 import javafx.fxml.FXML;

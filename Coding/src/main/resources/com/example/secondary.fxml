@@ -7,7 +7,7 @@
 <?import javafx.geometry.Insets?>
 
 <!--source: https://www.youtube.com/watch?v=nEKQjAP0lrQ&ab_channel=BroCode-->
-<VBox alignment="CENTER" spacing="20.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.Frontend_Logic.SecondaryController">
+<VBox alignment="CENTER" spacing="20.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.SecondaryController">
     <children>
         <Label text="Loading" />
         <ProgressBar fx:id="CodeLoading" progress="0.0"/>

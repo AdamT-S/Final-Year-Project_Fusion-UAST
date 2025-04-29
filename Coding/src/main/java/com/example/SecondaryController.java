@@ -1,4 +1,4 @@
-package com.example.Frontend_Logic;
+package com.example;
 
 import java.io.IOException;
 import java.util.List;

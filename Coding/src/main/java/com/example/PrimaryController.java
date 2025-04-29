@@ -1,4 +1,4 @@
-package com.example.Frontend_Logic;
+package com.example;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -15,7 +15,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import com.example.Main;
+
 import com.example.CommandLine.APK_Manager;
 import com.example.CommandLine.CommandLineClass;
 import com.example.CommandLine.DAST_Class;
