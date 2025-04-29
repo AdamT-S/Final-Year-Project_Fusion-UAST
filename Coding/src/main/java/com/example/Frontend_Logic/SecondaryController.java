@@ -1,7 +1,10 @@
-package com.example;
+package com.example.Frontend_Logic;
 
 import java.io.IOException;
 import java.util.List;
+
+import com.example.CommandLine.CommandLineClass;
+import com.example.CommandLine.FileRead;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;

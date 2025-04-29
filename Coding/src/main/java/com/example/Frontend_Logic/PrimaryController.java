@@ -1,4 +1,4 @@
-package com.example;
+package com.example.Frontend_Logic;
 
 
 import javafx.fxml.FXML;
@@ -8,6 +8,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckMenuItem;
 import javafx.scene.control.Label;
+import javafx.scene.input.DataFormat;
 import javafx.scene.input.Dragboard;
 import javafx.scene.input.TransferMode;
 import javafx.scene.layout.StackPane;
@@ -17,7 +18,18 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.example.Main;
+import com.example.CommandLine.CommandLineClass;
+import com.example.CommandLine.DAST_Class;
+import com.example.CommandLine.FileRead;
+import com.example.CommandLine.ReportGenerator;
+
 public class PrimaryController {
+
+    //All file commands that get called
+
+
+    DAST_Class dynamicTest = new DAST_Class();
 
     @FXML
     private StackPane DragandDrop;
@@ -95,7 +107,7 @@ private void changePage() throws Exception {
         SecondaryController SecCon = loader.getController();
 
         if (RunAllTests.isSelected() || !RunAllTests.isSelected() && !(CheckPerms.isSelected() | CheckSAST.isSelected() | CheckDAST.isSelected())){
-            commands.add(() -> Test.SearchFiles(DragandDropLabel.getText()));
+            commands.add(() -> Test.getManifest(DragandDropLabel.getText()));
             commands.add(() -> {
                 try {
                     Test.FlagDangerousFiles(DragandDropLabel.getText());
@@ -104,12 +116,12 @@ private void changePage() throws Exception {
                     e.printStackTrace();
                 }
             });
-            commands.add(() -> Test.DASTCommand(DragandDropLabel.getText()));
+            commands.add(() -> dynamicTest.DASTCommand(DragandDropLabel.getText()));
         }
         else{
             // Wrap method calls in lambda expressions
             if (CheckPerms.isSelected()) {
-                commands.add(() -> Test.SearchFiles(DragandDropLabel.getText()));
+                commands.add(() -> Test.getManifest(DragandDropLabel.getText()));
             }
             if (CheckSAST.isSelected()) {
                 commands.add(() -> {
@@ -121,7 +133,7 @@ private void changePage() throws Exception {
                 });
             }
             if(CheckDAST.isSelected()){
-                commands.add(() -> Test.DASTCommand(DragandDropLabel.getText()));
+                commands.add(() -> dynamicTest.DASTCommand(DragandDropLabel.getText()));
             }
 
 

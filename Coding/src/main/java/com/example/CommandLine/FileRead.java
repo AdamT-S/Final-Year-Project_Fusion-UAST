@@ -1,4 +1,4 @@
-package com.example;
+package com.example.CommandLine;
 
 import java.io.BufferedReader;
 import java.io.FileReader;

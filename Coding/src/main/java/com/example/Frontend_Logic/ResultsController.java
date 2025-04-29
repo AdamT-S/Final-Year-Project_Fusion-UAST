@@ -1,4 +1,4 @@
-package com.example;
+package com.example.Frontend_Logic;
 
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
