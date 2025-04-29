@@ -27,6 +27,11 @@ public class Main {
         DAST_Class dast = new DAST_Class();
         /*
 
+        //a few things:
+        //1 overwrite the report file (or save it to another file location)
+        //2 add a link to the file location to view the files
+        //3 fix the rmdir command
+        //4 add the output files into a "techy" file
 
         
         String directory = "/home/kali/Final Year Project/Final-Year-Project-Automated-PenTest/Android-InsecureBankv2-master/InsecureBankv2/app/src/main/AndroidManifest.xml";
