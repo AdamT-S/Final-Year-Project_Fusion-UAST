@@ -11,6 +11,12 @@ public class startup {
 
         new File("/home/kali/Fusion-UAST");
 
+        File old_report = new File("/home/kali/Fusion-UAST/Old_Reports");
+        String move_oldFiles [] = {"mv", "/home/kali/Fusion-UAST/Final_Report.md", old_report.toString()};
+        String move_oldFolder [] = {"mv", "/home/kali/Fusion-UAST/fullReports", old_report.toString()};
+        Test.complexCommandRun(move_oldFiles);
+        Test.complexCommandRun(move_oldFolder);
+
         // This creates a temporary directory to save the .class, .jar, and sbom files
         File tempDirectory = new File("/home/kali/Fusion-UAST/tempFiles");
         if (!tempDirectory.exists()) 

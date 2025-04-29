@@ -77,7 +77,7 @@ public class DAST_Class {
                 
                         //Run Grype scan on the SBOM
                         System.out.println("Scanning with Grype...");
-                        String grypeOutputPath = (classFilePath.replace(".class", "_grypeOutput.txt").replace("/tempFiles", ""));
+                        String grypeOutputPath = (classFilePath.replace(".class", "_grypeOutput.txt").replace("/tempFiles", "/fullReports"));
                         String grypeCommand = "grype sbom:" + sbomFilePath + " > " + grypeOutputPath;
                         String[] grypeScan = {"/bin/bash", "-c", grypeCommand};
                         command.complexCommandRun(grypeScan);

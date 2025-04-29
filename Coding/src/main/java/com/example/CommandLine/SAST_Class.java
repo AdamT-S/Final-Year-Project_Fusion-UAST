@@ -11,7 +11,7 @@ public class SAST_Class
     public Runnable Semgrep_run(String Directory) throws IOException
     {
 
-        String SAST_Sgrep = "semgrep scan --config auto " + "\"" + Directory + "\""+ " --output /home/kali/Fusion-UAST/SemgrepOutput.txt --text";
+        String SAST_Sgrep = "semgrep scan --config auto " + "\"" + Directory + "\""+ " --output /home/kali/Fusion-UAST/fullReports/SemgrepOutput.txt --text";
         System.out.println(SAST_Sgrep);
         command.commandLineRun(SAST_Sgrep, Directory);
         //This really needs to be made dynamic so that it works on other platforms, but its fine for the demo rn
