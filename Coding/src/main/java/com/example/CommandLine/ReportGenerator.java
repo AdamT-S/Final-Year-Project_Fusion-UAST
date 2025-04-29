@@ -55,6 +55,7 @@ public class ReportGenerator {
                     System.out.println(grypePath.toString()); 
                     System.out.println(file);
                     BufferedReader reader = new BufferedReader(new FileReader(file.toString()));
+                    
                     if (file.toString().contains("grypeOutput") || file.toString().contains("Semgrep"))
                     {
 
@@ -158,11 +159,14 @@ public class ReportGenerator {
                             String currentLine;
                             while ((currentLine = reader.readLine()) != null) 
                             {
-                                currentLine = reader.readLine();
                                 writer.write(currentLine);
                             }
                             writer.write("\n\n");
                         }
+                    }
+                    else
+                    {
+
                     }
                     reader.close();
                     return FileVisitResult.CONTINUE;

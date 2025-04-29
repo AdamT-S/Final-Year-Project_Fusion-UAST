@@ -34,8 +34,8 @@ public class Main {
         file.ReadManifest(directory);
         Test.PrintAllFiles("/home/kali/Final Year Project/Final-Year-Project-Automated-PenTest/Android-InsecureBankv2-master/InsecureBankv2");
         //Test.FlagDangerousFiles("/home/kali/test");*/
-        dast.DASTCommand("/home/kali/Fusion-UAST/apk/");
-        //report.mdMaker("/home/kali/Fusion-UAST/");
+        //dast.DASTCommand("/home/kali/Fusion-UAST/apk/");
+        report.mdMaker("/home/kali/Fusion-UAST/");
         //APK_Manager apk_Manager = new APK_Manager();
         //apk_Manager.decompiler("/home/kali/InsecureBankv2.apk");
         
