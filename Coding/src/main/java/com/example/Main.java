@@ -27,9 +27,6 @@ public class Main {
         DAST_Class dast = new DAST_Class();
         /*
 
-        //a few things:
-        //2 add a link to the file location to view the files
-
         
         String directory = "/home/kali/Final Year Project/Final-Year-Project-Automated-PenTest/Android-InsecureBankv2-master/InsecureBankv2/app/src/main/AndroidManifest.xml";
         Test.ListDir();

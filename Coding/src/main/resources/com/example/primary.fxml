@@ -44,8 +44,11 @@
                 </VBox>
             </StackPane>
             <Button fx:id = "submitButton" text="Submit" style="-fx-font-size: 14px;" onAction="#changePage"/>
+            <!--
+            Buttons for testing the code to skip the inputs
             <Button fx:id = "testButton" text="Test Functions" style="-fx-font-size: 14px;" onAction="#runTests"/>
             <Button fx:id = "jumpPageButton" text="Go to Results Page" style="-fx-font-size: 14px;" onAction="#Page3"/>
+            !-->
         </VBox>
     </center>
 </BorderPane>
