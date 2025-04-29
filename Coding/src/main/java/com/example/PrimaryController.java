@@ -150,7 +150,7 @@ private void changePage() throws Exception
     public void testChecker(String filepath, List<Runnable> commands)
     {
         //adding tests for running
-        if (RunAllTests.isSelected() || (!RunAllTests.isSelected() && (CheckSAST.isSelected() || CheckDAST.isSelected())))
+        if (RunAllTests.isSelected())
         {   
         
             commands.add(() -> {
