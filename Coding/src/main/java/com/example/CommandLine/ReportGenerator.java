@@ -20,11 +20,14 @@ public class ReportGenerator {
 
     public void mdMaker(String filePath)
     {
+        String testingFileName = filePath.substring(filePath.lastIndexOf("/")-1 );
         File FinalReport = new File(filePath+"/Final_Report.md");
         System.out.println(FinalReport + " created");
+        File old_report = new File("/home/kali/Fusion-UAST/Old_Reports");
     
         try 
         {
+            command.commandLineRun("mv ", FinalReport + " " + old_report.toString());
             BufferedWriter writer = new BufferedWriter(new FileWriter(FinalReport, true));
             writer.write("#" + FinalReport.toString() + " Report\n\n");
             fileBody(filePath, writer);
@@ -187,7 +190,10 @@ public class ReportGenerator {
 
     public void deleteTempFiles()
     {
-        command.commandLineRun("rmdir -r", "/home/kali/Fusion-UAST/tempFiles");
+        String remove_temps[] = {"rm", "-r", "/home/kali/Fusion-UAST/tempFiles"};
+        String remove_apk[] = {"rm", "-r", "/home/kali/Fusion-UAST/apk"};
+        command.complexCommandRun(remove_temps);
+        command.complexCommandRun(remove_apk);
     }
     
 }
