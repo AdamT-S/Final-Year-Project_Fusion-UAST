@@ -183,7 +183,7 @@ public class ReportGenerator {
 
     public void deleteTempFiles()
     {
-        command.commandLineRun("rm -r", "/home/kali/Fusion-UAST/tempFiles");
+        command.commandLineRun("rmdir -r", "/home/kali/Fusion-UAST/tempFiles");
     }
     
 }

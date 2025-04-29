@@ -97,7 +97,8 @@ public class PrimaryController {
     @FXML
 private void changePage() throws Exception 
 {
-
+   
+    
     if (DragandDropLabel.getText().contains("/") && CheckSAST.isSelected() || CheckDAST.isSelected() || RunAllTests.isSelected())
     {
         //Checkpoint for debugging
@@ -111,56 +112,29 @@ private void changePage() throws Exception
         FXMLLoader loader = new FXMLLoader(getClass().getResource("secondary.fxml"));
         Parent root = loader.load();
         SecondaryController SecCon = loader.getController();
+        boolean thisPathWillChange = false;
+        String replacePath = DragandDropLabel.getText();
 
-        if(DragandDropLabel.getText().contains(".apk"))
+        if(replacePath.contains(".apk"))
         {
-            commands.add(() -> apkManager.decompiler(DragandDropLabel.getText()));
-            DragandDropLabel.setText(DragandDropLabel.getText().replace(".apk", ""));
-            commands.add(() -> apkManager.getManifest(DragandDropLabel.getText()));
+            apkManager.decompiler(replacePath);
+             
+            thisPathWillChange = true; 
         }
 
-        //adding tests for running
-        if (RunAllTests.isSelected() || !RunAllTests.isSelected() && CheckSAST.isSelected() | CheckDAST.isSelected())
+        if(thisPathWillChange == true)
         {
-            
-            commands.add(() -> {
-                try
-                {
-                    staticTest.Semgrep_run(DragandDropLabel.getText());
-                    
-                }
-                
-                catch (IOException e) 
-                {
-                    e.printStackTrace();
-                }
-            });
-            commands.add(() -> dynamicTest.DASTCommand(DragandDropLabel.getText()));
+            testChecker("/home/kali/Fusion-UAST/apk", commands);
         }
-        //If all tests not selected, then individual ones will be
+        else if(thisPathWillChange == false)
+        {
+            testChecker(replacePath, commands);
+        }
         else
         {
-            if (CheckSAST.isSelected())
-            {
-                commands.add(() -> {
-                    try
-                    {
-                        staticTest.Semgrep_run(DragandDropLabel.getText());
-                    } 
-                    
-                    catch (IOException e) 
-                    {
-                        e.printStackTrace();
-                    }
-                });
-            }
-            if(CheckDAST.isSelected())
-            {
-                commands.add(() -> dynamicTest.DASTCommand(DragandDropLabel.getText()));
-            }
-
-
+            System.out.println("Something went really wrong to fail true and false");
         }
+
         
         commands.add(() -> reportMaker.mdMaker("/home/kali/Fusion-UAST/"));
         Scene scene = new Scene(root);
@@ -173,6 +147,52 @@ private void changePage() throws Exception
         DragandDropLabel.setText("Invalid input! Please tick the tests you want to run");
     }
 }
+    public void testChecker(String filepath, List<Runnable> commands)
+    {
+        //adding tests for running
+        if (RunAllTests.isSelected() || (!RunAllTests.isSelected() && (CheckSAST.isSelected() || CheckDAST.isSelected())))
+        {   
+        
+            commands.add(() -> {
+                try
+                {
+                    staticTest.Semgrep_run(filepath);
+                    
+                }
+                
+                catch (IOException e) 
+                {
+                    e.printStackTrace();
+                }
+            });
+            commands.add(() -> dynamicTest.DASTCommand(filepath));
+        }
+        //If all tests not selected, then individual ones will be
+        else
+        {
+            if (CheckSAST.isSelected())
+            {
+                commands.add(() -> {
+                    try
+                    {
+                        staticTest.Semgrep_run(filepath);
+                    } 
+                    
+                    catch (IOException e) 
+                    {
+                        e.printStackTrace();
+                    }
+                });
+            }
+            if(CheckDAST.isSelected())
+            {
+                commands.add(() -> dynamicTest.DASTCommand(filepath));
+            }
+
+
+        }
+    }
+    
 
     // This runs all the backend in one go to ensure that it is all functional
     @FXML
@@ -192,6 +212,7 @@ private void changePage() throws Exception
     {
         Stage stage = (Stage) jumpPageButton.getScene().getWindow();
         FXMLLoader loader = new FXMLLoader(getClass().getResource("results.fxml"));
+        stage.setTitle("Loading...");
         Parent root = loader.load(); 
         Scene scene = new Scene(root);
         ResultsController res = loader.getController();
