@@ -15,7 +15,7 @@ public class APK_Manager
 
     public void decompiler(String APK)
     {    
-        String decompile = "apktool d" + APK;
+        String decompile = "apktool d " + APK + " -o /home/kali/Fusion-UAST/apk -f";
         command.commandLineRun(decompile, null);
 
     }

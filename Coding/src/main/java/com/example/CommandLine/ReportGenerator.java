@@ -15,6 +15,7 @@ import java.nio.file.attribute.BasicFileAttributes;
 
 public class ReportGenerator {
 
+    CommandLineClass command = new CommandLineClass();
     
 
     public void mdMaker(String filePath)
@@ -27,6 +28,7 @@ public class ReportGenerator {
             BufferedWriter writer = new BufferedWriter(new FileWriter(FinalReport, true));
             writer.write("#" + FinalReport.toString() + " Report\n\n");
             fileBody(filePath, writer);
+            deleteTempFiles();
             writer.close();
         } 
         
@@ -177,6 +179,11 @@ public class ReportGenerator {
         {
     
         }
+    }
+
+    public void deleteTempFiles()
+    {
+        command.commandLineRun("rm -r", "/home/kali/Fusion-UAST/tempFiles");
     }
     
 }

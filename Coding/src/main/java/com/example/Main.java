@@ -1,6 +1,8 @@
 package com.example;
 
 import java.io.IOException;
+
+import com.example.CommandLine.APK_Manager;
 import com.example.CommandLine.startup;
 
 
@@ -30,6 +32,8 @@ public class Main {
         //Test.FlagDangerousFiles("/home/kali/test");
         //Test.DASTCommand("/home/kali/test/");
         report.mdMaker("/home/kali/Fusion-UAST/");*/
+        APK_Manager apk_Manager = new APK_Manager();
+        apk_Manager.decompiler("/home/kali/InsecureBankv2.apk");
         
     }
 }
