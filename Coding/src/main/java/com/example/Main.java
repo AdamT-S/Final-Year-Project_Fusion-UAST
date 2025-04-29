@@ -29,7 +29,6 @@ public class Main {
 
         //a few things:
         //2 add a link to the file location to view the files
-        //6 Fix the duplicate writing in the folder
 
         
         String directory = "/home/kali/Final Year Project/Final-Year-Project-Automated-PenTest/Android-InsecureBankv2-master/InsecureBankv2/app/src/main/AndroidManifest.xml";
