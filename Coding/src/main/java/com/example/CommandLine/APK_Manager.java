@@ -33,6 +33,7 @@ public class APK_Manager
                 @Override
                 public FileVisitResult visitFile(Path file, BasicFileAttributes attrs) throws IOException
                 {
+                    //Debug method to check files are actively being visited
                     System.out.println("Visited " + file);
                     if(file.toString().contains("Manifest"))
                     {
