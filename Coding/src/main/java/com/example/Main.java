@@ -1,10 +1,14 @@
 package com.example;
 import java.io.IOException;
-import com.example.startup;
+
+import com.example.CommandLine.CommandLineClass;
+import com.example.CommandLine.FileRead;
+import com.example.CommandLine.ReportGenerator;
+import com.example.CommandLine.startup;
 
 
 public class Main {
-    static void StartProgram(){
+    public static void StartProgram(){
         startup launchStartup = new startup();
         launchStartup.fileCreation();
     }
@@ -12,20 +16,21 @@ public class Main {
     //The main class right now just acts more as a test button, App.java should really be the Main class.
     public static void main(String[] args) throws IOException{
         
+        //These commands are all for testing purposes
         
-        CommandLineClass Test = new CommandLineClass();
+        /*CommandLineClass Test = new CommandLineClass();
         FileRead file = new FileRead();
         ReportGenerator report = new ReportGenerator();
 
 
         
-        /*String directory = "/home/kali/Final Year Project/Final-Year-Project-Automated-PenTest/Android-InsecureBankv2-master/InsecureBankv2/app/src/main/AndroidManifest.xml";
+        String directory = "/home/kali/Final Year Project/Final-Year-Project-Automated-PenTest/Android-InsecureBankv2-master/InsecureBankv2/app/src/main/AndroidManifest.xml";
         Test.ListDir();
         file.ReadManifest(directory);
-        Test.PrintAllFiles("/home/kali/Final Year Project/Final-Year-Project-Automated-PenTest/Android-InsecureBankv2-master/InsecureBankv2");*/
+        Test.PrintAllFiles("/home/kali/Final Year Project/Final-Year-Project-Automated-PenTest/Android-InsecureBankv2-master/InsecureBankv2");
         //Test.FlagDangerousFiles("/home/kali/test");
         //Test.DASTCommand("/home/kali/test/");
-        report.mdMaker("/home/kali/Fusion-UAST/");
+        report.mdMaker("/home/kali/Fusion-UAST/");*/
         
     }
 }

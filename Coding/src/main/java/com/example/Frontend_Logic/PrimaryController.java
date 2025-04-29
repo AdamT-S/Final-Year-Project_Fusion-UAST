@@ -8,7 +8,6 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckMenuItem;
 import javafx.scene.control.Label;
-import javafx.scene.input.DataFormat;
 import javafx.scene.input.Dragboard;
 import javafx.scene.input.TransferMode;
 import javafx.scene.layout.StackPane;
@@ -19,17 +18,23 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.example.Main;
+import com.example.CommandLine.APK_Manager;
 import com.example.CommandLine.CommandLineClass;
 import com.example.CommandLine.DAST_Class;
 import com.example.CommandLine.FileRead;
 import com.example.CommandLine.ReportGenerator;
+import com.example.CommandLine.SAST_Class;
 
 public class PrimaryController {
 
     //All file commands that get called
-
-
+    APK_Manager apkManager = new APK_Manager();
+    CommandLineClass Test = new CommandLineClass();
     DAST_Class dynamicTest = new DAST_Class();
+    FileRead file = new FileRead();
+    ReportGenerator reportMaker = new ReportGenerator();
+    SAST_Class staticTest = new SAST_Class();
+
 
     @FXML
     private StackPane DragandDrop;
@@ -38,9 +43,8 @@ public class PrimaryController {
     @FXML
     private Label DragandDropLabel;
 
-    CommandLineClass Test = new CommandLineClass();
-    FileRead file = new FileRead();
-    ReportGenerator reportMaker = new ReportGenerator();
+    
+    
     private String testFile;
 
     @FXML
@@ -107,10 +111,10 @@ private void changePage() throws Exception {
         SecondaryController SecCon = loader.getController();
 
         if (RunAllTests.isSelected() || !RunAllTests.isSelected() && !(CheckPerms.isSelected() | CheckSAST.isSelected() | CheckDAST.isSelected())){
-            commands.add(() -> Test.getManifest(DragandDropLabel.getText()));
+            commands.add(() -> apkManager.getManifest(DragandDropLabel.getText()));
             commands.add(() -> {
                 try {
-                    Test.FlagDangerousFiles(DragandDropLabel.getText());
+                    staticTest.Semgrep_run(DragandDropLabel.getText());
                     
                 } catch (IOException e) {
                     e.printStackTrace();
@@ -121,12 +125,12 @@ private void changePage() throws Exception {
         else{
             // Wrap method calls in lambda expressions
             if (CheckPerms.isSelected()) {
-                commands.add(() -> Test.getManifest(DragandDropLabel.getText()));
+                commands.add(() -> apkManager.getManifest(DragandDropLabel.getText()));
             }
             if (CheckSAST.isSelected()) {
                 commands.add(() -> {
                     try {
-                        Test.FlagDangerousFiles(DragandDropLabel.getText());
+                        staticTest.Semgrep_run(DragandDropLabel.getText());
                     } catch (IOException e) {
                         e.printStackTrace();
                     }

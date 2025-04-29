@@ -1,7 +1,6 @@
 package com.example.CommandLine;
 
 import java.io.BufferedWriter;
-import java.io.Console;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
