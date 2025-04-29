@@ -127,7 +127,7 @@ private void changePage() throws Exception {
 
         }
         
-        commands.add(() -> reportMaker.mdMaker(DragandDropLabel.getText()));
+        commands.add(() -> reportMaker.mdMaker("/home/kali/Fusion-UAST/"));
         Scene scene = new Scene(root);
         stage.setScene(scene);
         SecCon.increase(commands);
