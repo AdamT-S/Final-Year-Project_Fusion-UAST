@@ -57,6 +57,12 @@ public class ReportGenerator {
                     System.out.println(file);
                     BufferedReader reader = new BufferedReader(new FileReader(file.toString()));
                     
+                    if (file.toString().contains("Old_Report")) 
+                    {
+                        System.out.println("Skipping old report: " + file.toString());
+                        return FileVisitResult.CONTINUE;
+                    }
+                
                     if (file.toString().contains("grypeOutput") || file.toString().contains("Semgrep"))
                     {
 
