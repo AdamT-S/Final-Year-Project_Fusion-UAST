@@ -30,7 +30,6 @@
             <MenuButton fx:id="TestSelection" text = "Select Testing Tools">
                <items>
                     <CheckMenuItem fx:id="RunAllTests" text="Run All Tests"/>
-                    <CheckMenuItem fx:id="CheckPerms" text="Check Permissions" />
                     <CheckMenuItem fx:id="CheckSAST" text="Run Static Analysis" />
                     <CheckMenuItem fx:id="CheckDAST" text="Run Dynamic Analysis" />
                </items>

@@ -1,6 +1,5 @@
 package com.example.Frontend_Logic;
 
-
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -16,7 +15,6 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-
 import com.example.Main;
 import com.example.CommandLine.APK_Manager;
 import com.example.CommandLine.CommandLineClass;
@@ -36,15 +34,12 @@ public class PrimaryController {
     SAST_Class staticTest = new SAST_Class();
 
 
+    //This section applies the drag and drop feature on the first page
     @FXML
     private StackPane DragandDrop;
 
-    //This is the label for the drag and drop box
     @FXML
     private Label DragandDropLabel;
-
-    
-    
     private String testFile;
 
     @FXML
@@ -77,11 +72,10 @@ public class PrimaryController {
     
     }
 
+
+    //This section runs the different test types
     @FXML
     CheckMenuItem RunAllTests;
-
-    @FXML
-    CheckMenuItem CheckPerms;
 
     @FXML
     CheckMenuItem CheckSAST;
@@ -101,42 +95,60 @@ public class PrimaryController {
     private Label invalidInput;
 
     @FXML
-private void changePage() throws Exception {
-    if (DragandDropLabel.getText().contains("/") && (CheckPerms.isSelected() || CheckSAST.isSelected() || CheckDAST.isSelected() || RunAllTests.isSelected())) {
+private void changePage() throws Exception 
+{
+
+    if (DragandDropLabel.getText().contains("/") && CheckSAST.isSelected() || CheckDAST.isSelected() || RunAllTests.isSelected())
+    {
+        //Checkpoint for debugging
         System.out.println(testFile);
+
+        //List of commands that will run during the tests
         List<Runnable> commands = new ArrayList<>();
+
+        //preping the next stage
         Stage stage = (Stage) submitButton.getScene().getWindow();
         FXMLLoader loader = new FXMLLoader(getClass().getResource("secondary.fxml"));
         Parent root = loader.load();
         SecondaryController SecCon = loader.getController();
 
-        if (RunAllTests.isSelected() || !RunAllTests.isSelected() && !(CheckPerms.isSelected() | CheckSAST.isSelected() | CheckDAST.isSelected())){
+        //adding tests for running
+        if (RunAllTests.isSelected() || !RunAllTests.isSelected() && CheckSAST.isSelected() | CheckDAST.isSelected())
+        {
             commands.add(() -> apkManager.getManifest(DragandDropLabel.getText()));
             commands.add(() -> {
-                try {
+                try
+                {
                     staticTest.Semgrep_run(DragandDropLabel.getText());
                     
-                } catch (IOException e) {
+                }
+                
+                catch (IOException e) 
+                {
                     e.printStackTrace();
                 }
             });
             commands.add(() -> dynamicTest.DASTCommand(DragandDropLabel.getText()));
         }
-        else{
-            // Wrap method calls in lambda expressions
-            if (CheckPerms.isSelected()) {
-                commands.add(() -> apkManager.getManifest(DragandDropLabel.getText()));
-            }
-            if (CheckSAST.isSelected()) {
+        //If all tests not selected, then individual ones will be
+        else
+        {
+            if (CheckSAST.isSelected())
+            {
                 commands.add(() -> {
-                    try {
+                    try
+                    {
                         staticTest.Semgrep_run(DragandDropLabel.getText());
-                    } catch (IOException e) {
+                    } 
+                    
+                    catch (IOException e) 
+                    {
                         e.printStackTrace();
                     }
                 });
             }
-            if(CheckDAST.isSelected()){
+            if(CheckDAST.isSelected())
+            {
                 commands.add(() -> dynamicTest.DASTCommand(DragandDropLabel.getText()));
             }
 
@@ -147,7 +159,10 @@ private void changePage() throws Exception {
         Scene scene = new Scene(root);
         stage.setScene(scene);
         SecCon.increase(commands);
-    } else {
+    } 
+
+    else 
+    {
         DragandDropLabel.setText("Invalid input! Please tick the tests you want to run");
     }
 }
@@ -158,14 +173,16 @@ private void changePage() throws Exception {
 
 
     @FXML
-    void runTests() throws Exception{
+    void runTests() throws Exception
+    {
         Main.main(null);
     }
 
     @FXML
     private Button jumpPageButton;
     @FXML
-    void Page3() throws Exception {
+    void Page3() throws Exception 
+    {
         Stage stage = (Stage) jumpPageButton.getScene().getWindow();
         FXMLLoader loader = new FXMLLoader(getClass().getResource("results.fxml"));
         Parent root = loader.load(); 

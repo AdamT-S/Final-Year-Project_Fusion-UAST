@@ -17,16 +17,21 @@ public class ReportGenerator {
 
     
 
-    public void mdMaker(String filePath){
+    public void mdMaker(String filePath)
+    {
         File FinalReport = new File(filePath+"/Final_Report.md");
         System.out.println(FinalReport + " created");
     
-        try {
+        try 
+        {
             BufferedWriter writer = new BufferedWriter(new FileWriter(FinalReport, true));
             writer.write("#" + FinalReport.toString() + " Report\n\n");
             fileBody(filePath, writer);
             writer.close();
-        } catch (IOException e) {
+        } 
+        
+        catch (IOException e) 
+        {
             e.printStackTrace();
         }
         
@@ -34,7 +39,8 @@ public class ReportGenerator {
     
     public void fileBody(String FilePath, BufferedWriter writer)
     {
-        try{
+        try
+        {
             System.out.println("Starting file reads");
             boolean grypeDesc = false;
             Path grypePath = Paths.get(FilePath);
@@ -47,7 +53,9 @@ public class ReportGenerator {
                     System.out.println(grypePath.toString()); 
                     System.out.println(file);
                     BufferedReader reader = new BufferedReader(new FileReader(file.toString()));
-                   if (file.toString().contains("grypeOutput") || file.toString().contains("Semgrep")) {
+                    if (file.toString().contains("grypeOutput") || file.toString().contains("Semgrep"))
+                    {
+
                         if(file.toString().contains("grypeOutput") )
                         {  
                             System.out.println("Running in Grype reports");
@@ -67,7 +75,8 @@ public class ReportGenerator {
                             int unknownCounter = 0;
                         
                             String currentLine;
-                            while ((currentLine = reader.readLine()) != null) {
+                            while ((currentLine = reader.readLine()) != null) 
+                            {
                                 if(currentLine.contains("Critical"))
                                 {
                                     critCounter += 1;
@@ -97,7 +106,8 @@ public class ReportGenerator {
                             {
                                 System.out.println("This is the error thats been plaguing you");
                             }
-                            else{
+                            else
+                            {
                                int critPercent = (critCounter*100) / counterTotal;
                                 int highPercent = (highCounter*100) / counterTotal;
                                 int mediumPercent = (mediumCounter*100) / counterTotal;
@@ -137,7 +147,8 @@ public class ReportGenerator {
                             } 
                         }
                             
-                        if(file.toString().contains("Semgrep")){
+                        if(file.toString().contains("Semgrep"))
+                        {
                             System.out.println("Running in sast report");
                             writer.write("\n##Static Application Security Analysis Results\n");
                             writer.write("###**Static Application Security Analysis(SAST) is a method of vulnerability detection where an application analyses an programs source code[^1]. This program then checks for vulnerabilities within the software by checking commands for any potential issues that are associated with those commands.**\n\n");
@@ -151,6 +162,7 @@ public class ReportGenerator {
                             writer.write("\n\n");
                         }
                     }
+                    reader.close();
                     return FileVisitResult.CONTINUE;
                 } 
                 
@@ -161,7 +173,8 @@ public class ReportGenerator {
             writer.close();
             
         }
-        catch (IOException e){
+        catch (IOException e)
+        {
     
         }
     }

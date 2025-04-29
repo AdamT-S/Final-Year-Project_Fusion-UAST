@@ -1,23 +1,22 @@
 package com.example;
-import java.io.IOException;
 
-import com.example.CommandLine.CommandLineClass;
-import com.example.CommandLine.FileRead;
-import com.example.CommandLine.ReportGenerator;
+import java.io.IOException;
 import com.example.CommandLine.startup;
 
 
 public class Main {
-    public static void StartProgram(){
+    public static void StartProgram()
+    {
         startup launchStartup = new startup();
         launchStartup.fileCreation();
     }
 
     //The main class right now just acts more as a test button, App.java should really be the Main class.
-    public static void main(String[] args) throws IOException{
+    public static void main(String[] args) throws IOException
+    {
         
         //These commands are all for testing purposes
-        
+
         /*CommandLineClass Test = new CommandLineClass();
         FileRead file = new FileRead();
         ReportGenerator report = new ReportGenerator();

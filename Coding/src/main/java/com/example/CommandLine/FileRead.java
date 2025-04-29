@@ -15,9 +15,11 @@ public class FileRead{
     List<String> permList = new ArrayList<>();
     List<String> dangerousFileList = new ArrayList<>();
 
-    public Runnable ReadWholeFile(String FileName, String outputFile)
+    public Runnable readWholeFile(String FileName, String outputFile)
     {
-        try{
+
+        try
+        {
             FileWriter writer = new FileWriter(outputFile, true);
             BufferedReader reader = new BufferedReader(new FileReader(FileName));
             String line = reader.readLine();
@@ -30,6 +32,7 @@ public class FileRead{
                 System.out.println("Data transfered succesfully");
                 line = reader.readLine();
             }
+
             writer.write(System.lineSeparator()+System.lineSeparator());
             reader.close();
             writer.close();
@@ -42,18 +45,24 @@ public class FileRead{
     }
 
     //Read the manifest files and its permissions
-    public Runnable ReadManifest(String FileName)
+    public Runnable readManifest(String FileName)
     {
+
         //This ensures that if the file returns with an error that the system doesnt crash
-        try{
+        try
+        {
             BufferedReader reader = new BufferedReader(new FileReader(FileName));
             String line = reader.readLine();
+
             //Gets the data after the android.permission section in the manifest file
             Pattern pattern = Pattern.compile("android\\.permission\\.([^\"]+)\"");
             //reads the whole document to make sure that all of the permissions are added
-            while (line!= null){
+            while (line!= null)
+            {
+
                 Matcher matcher = pattern.matcher(line);
-                if (matcher.find()){
+                if (matcher.find())
+                {
                     /*
                     Groups the part of the line that is desired within the manifest file and adds it to a list
                     ([^\"]+)\" is the group. () acts as the grouping [^\"] acts as the characters that can be used where ^" means any character except "
@@ -65,20 +74,26 @@ public class FileRead{
                 
                 line = reader.readLine();
             }
+
             reader.close();
+
             //prints off Manifest permissions
             System.out.println("Permissions: ");
-            for (String s : permList){
+            
+            for (String s : permList)
+            {
                 System.out.println(s);
             }
         }
+
         catch (IOException e){
             e.printStackTrace();
         }
                 return null; 
     }
 
-    public void ReadFlaggedFiles(String FileName, String FilePath) throws IOException{
+    public void ReadFlaggedFiles(String FileName, String FilePath) throws IOException
+    {
         // source: https://stackoverflow.com/questions/11169266/in-java-how-to-print-entire-line-in-the-file-when-string-match-found
         String[] firstPartOfFile = FilePath.split("/");
         String path = firstPartOfFile[1]; 
@@ -90,17 +105,21 @@ public class FileRead{
         String line;
         List<String> dangerousFileList = new ArrayList<>();
         
-        try {
+        try 
+        {
             line = r.readLine();
             int issuebreak = 0;
             
-            while (line != null && issuebreak < 11) {
+            while (line != null && issuebreak < 11) 
+            {
                 Matcher matcher = patt.matcher(line);
-                if (matcher.find()) {
+                if (matcher.find()) 
+                {
                     dangerousFileList.add(line);
                     int checkPath = line.lastIndexOf(".");
 
-                    while (checkPath == -1 && line != null) { 
+                    while (checkPath == -1 && line != null) 
+                    { 
                         line = r.readLine();
                         checkPath = line.lastIndexOf(".");
                         dangerousFileList.add(line);
@@ -118,14 +137,16 @@ public class FileRead{
             System.out.println("No issues here");
             
             System.out.println("Dangerous Files: ");
-            for (String s : dangerousFileList) {
+            for (String s : dangerousFileList) 
+            {
                 System.out.println(s);
             }
 
             List<String> appendedDangerList = new ArrayList<>();
             StringBuilder addStringBuilder = new StringBuilder();
 
-            for(String val : dangerousFileList){
+            for(String val : dangerousFileList)
+            {
                 val = val.trim();
                 if(val.contains("."))
                 {
@@ -133,16 +154,21 @@ public class FileRead{
                     appendedDangerList.add(addStringBuilder.toString());
                     addStringBuilder.setLength(0);
                 }
-                else{
+                else
+                {
                     addStringBuilder.append((val));
                 }
                 
             }
-            for(String val : appendedDangerList){
+            
+            for(String val : appendedDangerList)
+            {
                 System.out.println(val);
             }
         }
-        catch (IOException e){
+
+        catch (IOException e)
+        {
             e.printStackTrace();
         }
     } 
