@@ -32,6 +32,7 @@ public class Main {
         //2 add a link to the file location to view the files
         //3 fix the rmdir command
         //4 add the output files into a "techy" file
+        //5 fix that error where semgrep is called on dast only
 
         
         String directory = "/home/kali/Final Year Project/Final-Year-Project-Automated-PenTest/Android-InsecureBankv2-master/InsecureBankv2/app/src/main/AndroidManifest.xml";
