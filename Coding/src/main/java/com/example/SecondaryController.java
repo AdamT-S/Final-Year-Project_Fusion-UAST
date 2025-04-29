@@ -21,20 +21,15 @@ public class SecondaryController {
 
     public void increase(List<Runnable> commandlist){
         System.out.println("The increase function has been succesfully called");
-        float progress_addit = 1.0f/commandlist.size();
+    
 
         for (Runnable command : commandlist) {
             command.run();
             System.out.println("The for loop has been successfully called");
-            progress_addit+=progress_addit;
-            CodeLoading.setProgress(progress_addit);
-            System.out.println(progress_addit);
                
             
         }
         
-        if(progress_addit >= 1)
-        {
 
             Stage stage = (Stage) CodeLoading.getScene().getWindow();
             FXMLLoader loader = new FXMLLoader(getClass().getResource("results.fxml"));
@@ -48,12 +43,7 @@ public class SecondaryController {
             } catch (IOException e) {
                 e.printStackTrace();
             }
-            
-        }
-        else
-        {
-            System.out.println("This is whats causing your code to quit :)");
-        }
+
         
     }
 
