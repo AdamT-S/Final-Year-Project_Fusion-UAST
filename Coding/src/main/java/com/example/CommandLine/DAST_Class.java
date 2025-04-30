@@ -46,7 +46,7 @@ public class DAST_Class {
                         if (!classFile.exists()) 
                         {
                             System.err.println("Error: .class file not found: " + classFilePath);
-                            System.exit(0);
+                            
                         }
                 
                         System.out.println("Creating JAR file...");
@@ -59,7 +59,7 @@ public class DAST_Class {
                         if (!jarFile.exists())
                         {
                             System.err.println("Error: JAR file not found: " + jarFilePath);
-                            System.exit(0);
+
                         }
 
                         System.out.println("Generating SBOM...");
@@ -72,7 +72,6 @@ public class DAST_Class {
                         if (!sbomFile.exists()) 
                         {
                             System.err.println("Error: SBOM file not found: " + sbomFilePath);
-                            System.exit(0);
                         }
                 
                         //Run Grype scan on the SBOM

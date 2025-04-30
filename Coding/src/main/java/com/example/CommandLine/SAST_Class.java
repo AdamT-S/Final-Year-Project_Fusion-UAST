@@ -15,7 +15,7 @@ public class SAST_Class
         System.out.println(SAST_Sgrep);
         command.commandLineRun(SAST_Sgrep, Directory);
         //This really needs to be made dynamic so that it works on other platforms, but its fine for the demo rn
-        FileReader.ReadFlaggedFiles("/home/kali/Fusion-UAST/SemgrepOutput.txt", Directory);
+        FileReader.ReadFlaggedFiles("/home/kali/Fusion-UAST/fullReports/SemgrepOutput.txt", Directory);
         return null;
     
     }
