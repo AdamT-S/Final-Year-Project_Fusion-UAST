@@ -22,4 +22,4 @@ There are some dependencies that you require in order to run this software(these
     (sudo apt install python3-pip)
 
 ### For the apk decompiler you require:
-https://apktool.org/ 
+sudo apt install jadx
