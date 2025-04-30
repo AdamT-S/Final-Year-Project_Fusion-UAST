@@ -47,7 +47,12 @@ public class ReportGenerator {
             System.out.println("Starting file reads");
             boolean grypeDesc = false;
             Path grypePath = Paths.get(FilePath);
-           
+            writer.write("##Dynamic Application Security Analysis Results\n\n");
+            writer.write("###**Dynamic Application Security Analysis(DAST) is a method of vulnerability detection where an application analyses a running program. DAST tests do not check the application's source code, but rather checks the running environment[^2] to see how it interacts with the programs operation.**\n");
+            writer.write("**A program should not have any critical errors within it. This must be fixed immediately as a hacker could exploit this very large vulnerability to perform an attack on the system.**\n");
+            writer.write("**It should also not have any high level vulnerabilities. There should be a zero tolerance of any vulnerabilities within the high and critical ranges.**\n");
+            writer.write("**If a program has any medium or low vulnerabilities, a few can be expected. Depending on the size of the program. If the program is large you can expect a few 10's or 100's of medium and low vulnerabilities. If the program is small, you should typically expect a few. These will need to be fixed but are not as urgent as the higher levels**\n\n");
+            
             Files.walkFileTree(grypePath, new SimpleFileVisitor<Path>()
             {
                 
@@ -71,12 +76,7 @@ public class ReportGenerator {
                             System.out.println("Running in Grype reports");
                             if(grypeDesc == false)
                             {
-                                writer.write("##Dynamic Application Security Analysis Results\n\n");
-                                writer.write("###**Dynamic Application Security Analysis(DAST) is a method of vulnerability detection where an application analyses a running program. DAST tests do not check the application's source code, but rather checks the running environment[^2] to see how it interacts with the programs operation.**\n");
-                                writer.write("**A program should not have any critical errors within it. This must be fixed immediately as a hacker could exploit this very large vulnerability to perform an attack on the system.**\n");
-                                writer.write("**It should also not have any high level vulnerabilities. There should be a zero tolerance of any vulnerabilities within the high and critical ranges.**\n");
-                                writer.write("**If a program has any medium or low vulnerabilities, a few can be expected. Depending on the size of the program. If the program is large you can expect a few 10's or 100's of medium and low vulnerabilities. If the program is small, you should typically expect a few. These will need to be fixed but are not as urgent as the higher levels**\n\n");
-                                final boolean grypeDesc = true;
+                                
                             }
                             int critCounter = 0;
                             int highCounter = 0;
